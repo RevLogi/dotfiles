@@ -1,0 +1,56 @@
+" GENERAL SETTINGS
+set nocompatible            " Disable Vi compatibility
+filetype off                " Required for plugin managers
+set encoding=utf-8          " Force UTF-8 encoding
+
+" PLUGINS (Vim-Plug)
+call plug#begin('~/.vim/plugged')
+
+  " Core Utilities
+  Plug 'bronson/vim-trailing-whitespace'  " Tools to clean whitespace
+  Plug 'lifepillar/vim-solarized8'        " Theme
+  Plug 'lambdalisue/vim-fern'             " File managers
+
+  " Haskell Support
+  Plug 'neovimhaskell/haskell-vim'        " Enhanced syntax highlighting
+  Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP Client (Intellisense)
+
+call plug#end()
+
+" Indentation settings
+filetype plugin indent on
+
+" APPEARANCE & UI
+syntax enable
+set shortmess+=I            " Disable startup message
+set number relativenumber   " Hybrid line numbering
+set laststatus=2            " Always show status line
+set colorcolumn=80          " Highlight 80th column (coding standard)
+
+" Theme Configuration (Solarized Light)
+set termguicolors
+set background=light
+colorscheme solarized8
+
+" BEHAVIOR
+set backspace=indent,eol,start " Allow backspacing over everything
+set hidden                     " Allow switching buffers without saving
+set incsearch                  " Search as you type
+set ignorecase smartcase       " Case-insensitive search unless caps used
+set noerrorbells visualbell t_vb= " Disable audio bell
+set mouse+=a                   " Enable mouse support
+
+" Unbind 'Q' (Ex mode)
+nmap Q <Nop>
+
+" --- HARD MODE: Disable Arrow Keys ---
+" Force yourself to use h/j/k/l
+nnoremap <Left>  :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up>    :echoe "Use k"<CR>
+nnoremap <Down>  :echoe "Use j"<CR>
+inoremap <Left>  <ESC>:echoe "Use h"<CR>
+inoremap <Right> <ESC>:echoe "Use l"<CR>
+inoremap <Up>    <ESC>:echoe "Use k"<CR>
+inoremap <Down>  <ESC>:echoe "Use j"<CR>
+
