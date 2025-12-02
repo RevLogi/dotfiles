@@ -57,3 +57,6 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
 " Vim slime configuration
 let g:slime_target = "tmux"
+
+" Auto save
+autocmd TextChanged,TextChangedI <buffer> silent write
