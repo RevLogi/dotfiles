@@ -10,6 +10,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'bronson/vim-trailing-whitespace'  " Tools to clean whitespace
   Plug 'lifepillar/vim-solarized8'        " Theme
   Plug 'lambdalisue/vim-fern'             " File managers
+  Plug 'jpalardy/vim-slime'
 
   " Haskell Support
   Plug 'neovimhaskell/haskell-vim'        " Enhanced syntax highlighting
@@ -54,3 +55,5 @@ inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
 
+" Vim slime configuration
+let g:slime_target = "tmux"
