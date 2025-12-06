@@ -122,6 +122,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
 alias code="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/code"
 alias home="cd"
+alias dl="cd Downloads"
 
 [ -f "/Users/liuguangxi/.ghcup/env" ] && . "/Users/liuguangxi/.ghcup/env" # ghcup-env
 
