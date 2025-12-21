@@ -11,6 +11,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'lifepillar/vim-solarized8'        " Theme
   Plug 'lambdalisue/vim-fern'             " File managers
   Plug 'jpalardy/vim-slime'
+  Plug 'tpope/vim-surround'
 
   " Haskell Support
   Plug 'neovimhaskell/haskell-vim'        " Enhanced syntax highlighting
@@ -28,10 +29,24 @@ set number relativenumber   " Hybrid line numbering
 set laststatus=2            " Always show status line
 set colorcolumn=80          " Highlight 80th column (coding standard)
 
-" Theme Configuration (Solarized Light)
+" Theme Configuration (Solarized)
+function! DetectDarkModeMacOS()
+    let l:theme = system('defaults read -g AppleInterfaceStyle 2>/dev/null')
+    if l:theme =~ 'Dark'
+        set background=dark
+    else
+        set background=light
+    endif
+endfunction
+
+augroup DarkMode
+    autocmd!
+    autocmd VimEnter * call DetectDarkModeMacOS()
+augroup END
+
 set termguicolors
-set background=light
 colorscheme solarized8
+
 
 " BEHAVIOR
 set backspace=indent,eol,start " Allow backspacing over everything
@@ -60,3 +75,14 @@ let g:slime_target = "tmux"
 
 " Auto save
 autocmd TextChanged,TextChangedI <buffer> silent write
+
+" Cursor configuration
+let &t_SI = "\e[5 q"
+let &t_SR = "\e[3 q"
+let &t_EI = "\e[1 q"
+
+augroup RestoreCursorShape
+  autocmd!
+  autocmd VimEnter * silent !echo -ne "\e[1 q"
+augroup END
+
