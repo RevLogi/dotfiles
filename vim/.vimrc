@@ -1,3 +1,21 @@
+" ═══════════════════════════════════════════════════════════════
+" MINIMAL VIM CONFIGURATION
+" ═══════════════════════════════════════════════════════════════
+"
+" This is a minimal Vim configuration for occasional use.
+" Primary editor: Neovim (see nvim/.config/nvim/)
+"
+" Features:
+" - Basic utility plugins (whitespace, slime, surround)
+" - Hard mode (no arrow keys)
+" - Auto-save
+"
+" Removed:
+" - LSP functionality (coc.nvim and all related config)
+" - File manager (vim-fern)
+" - Theme (solarized8)
+" - Haskell-specific syntax highlighting
+"
 
 set nocompatible            " Disable Vi compatibility
 filetype off                " Required for plugin managers
@@ -8,47 +26,10 @@ call plug#begin('~/.vim/plugged')
 
   " Core Utilities
   Plug 'bronson/vim-trailing-whitespace'  " Tools to clean whitespace
-  Plug 'lifepillar/vim-solarized8'        " Theme
-  Plug 'lambdalisue/vim-fern'             " File managers
-  Plug 'jpalardy/vim-slime'
+  Plug 'jpalardy/vim-slime'             " Code execution in tmux
   Plug 'tpope/vim-surround'
 
-  " Haskell Support
-  Plug 'neovimhaskell/haskell-vim'        " Enhanced syntax highlighting
-  Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP Client (Intellisense)
-
 call plug#end()
-
-" coc.nvim
-let g:coc_global_extensions = [
-			\ 'coc-vimlsp',
-			\ 'coc-hls',
-			\ 'coc-pyright',
-			\ 'coc-ccls',
-			\ 'coc-lua']
-
-" Respond faster
-set updatetime=300
-
-" Use tab for trigger completion with characters ahead and navigate
-inoremap <silent><expr> <TAB>
-      \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<Tab>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
-
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-function! CheckBackspace() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion
-inoremap <silent><expr> <c-@> coc#refresh()
 
 " Indentation settings
 filetype plugin indent on
@@ -59,25 +40,6 @@ set shortmess+=I            " Disable startup message
 set number relativenumber   " Hybrid line numbering
 set laststatus=2            " Always show status line
 set colorcolumn=80          " Highlight 80th column (coding standard)
-
-" Theme Configuration (Solarized)
-function! DetectDarkModeMacOS()
-    let l:theme = system('defaults read -g AppleInterfaceStyle 2>/dev/null')
-    if l:theme =~ 'Dark'
-        set background=dark
-    else
-        set background=light
-    endif
-endfunction
-
-augroup DarkMode
-    autocmd!
-    autocmd VimEnter * call DetectDarkModeMacOS()
-augroup END
-
-set termguicolors
-colorscheme solarized8
-
 
 " BEHAVIOR
 set backspace=indent,eol,start " Allow backspacing over everything
@@ -106,14 +68,4 @@ let g:slime_target = "tmux"
 
 " Auto save
 autocmd TextChanged,TextChangedI <buffer> silent write
-
-" Cursor configuration
-let &t_SI = "\e[5 q"
-let &t_SR = "\e[3 q"
-let &t_EI = "\e[1 q"
-
-augroup RestoreCursorShape
-  autocmd!
-  autocmd VimEnter * silent !echo -ne "\e[1 q"
-augroup END
 
