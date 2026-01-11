@@ -27,7 +27,6 @@ brew "cmake"                  # Cross-platform build system generator
 # Terminal emulator and shell configuration
 
 brew "tmux"                   # Terminal multiplexer
-brew "starship"               # Cross-shell prompt (referenced in .zimrc)
 cask "kitty"                  # GPU-accelerated terminal emulator
 
 # =====================================================================

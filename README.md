@@ -28,7 +28,7 @@ This repository contains my complete macOS development environment configuration
 
 This dotfiles repository provides a reproducible macOS development environment with:
 
-- **Shell**: Zsh with Zim Framework, Starship prompt, and vi-mode
+- **Shell**: Zsh with Zim Framework, Asciiship prompt, and vi-mode
 - **Terminal**: Kitty GPU-accelerated terminal with Catppuccin theme
 - **Editors**: Neovim (primary) with kickstart configuration, Vim (minimal)
 - **Terminal Multiplexer**: Tmux with plugins (CPU monitor, yank, navigator)
@@ -235,8 +235,8 @@ fc-list | grep -i "jetbrains"
 fc-list | grep -i "fira"
 fc-list | grep -i "nerd"
 
-# Set starship prompt (already configured in .zshrc)
-# Customize ~/.config/starship.toml if desired
+# Prompt is handled by asciiship (Zim module)
+# Asciiship is automatically loaded by Zim Framework
 ```
 
 ---
@@ -457,7 +457,7 @@ git push origin main
 - Autosuggestions
 - Syntax highlighting
 - History substring search (Ctrl+R)
-- Starship prompt integration
+- Asciiship prompt (minimal, ASCII-only prompt)
 
 **Shell Environment:**
 - Neovim managed by bob: `export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"`
@@ -668,12 +668,12 @@ Other:
 **File:** `Brewfile`
 
 **Package Summary:**
-- 26 brew formulas
+- 25 brew formulas
 - 6 brew casks
 
 **Categories:**
 1. Core Development Tools (git, gcc, make, cmake)
-2. Terminal & Shell (tmux, starship, kitty)
+2. Terminal & Shell (tmux, kitty)
 3. Terminal Utilities (fzf, ripgrep, fd, tree, zoxide, yazi, fastfetch, ncdu, stow, htop, btop, jq, wget, mole, bat, eza)
 4. Editors & Tools (bob, emacs-app)
 5. GitHub & Version Control (gh)
@@ -846,14 +846,17 @@ source ~/.zimfw.zsh init
 ls ~/.zim/
 ```
 
-**Problem:** Starship prompt not working
+**Problem:** Asciiship prompt not working
 ```bash
-# Install starship via Homebrew
-brew install starship
+# Check if asciiship module is installed
+ls ~/.zim/modules/asciiship
 
-# Ensure it's initialized in .zshrc
-grep "starship" ~/.zshrc
-# Should see: eval "$(starship init zsh)"
+# Verify it's in .zimrc
+grep "asciiship" ~/.zimrc
+# Should see: zmodule asciiship
+
+# Reinitialize zimfw
+source ~/.zimfw.zsh init
 ```
 
 **Problem:** Autosuggestions not working
@@ -1171,7 +1174,7 @@ stow -R -t ~ zsh nvim tmux vim kitty
 - **Tmux Manual:** `man tmux` or https://github.com/tmux/tmux/wiki
 - **Zsh Manual:** `man zsh` or https://zsh.sourceforge.io/Doc/
 - **Zim Framework:** https://github.com/zimfw/zimfw
-- **Starship Prompt:** https://starship.rs/config/
+- **Asciiship Prompt:** https://github.com/zimfw/asciiship
 - **Kitty Documentation:** https://sw.kovidgoyal.net/kitty/
 - **Homebrew Documentation:** https://docs.brew.sh/
 - **GNU Stow:** https://www.gnu.org/software/stow/
