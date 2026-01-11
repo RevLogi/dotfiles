@@ -111,10 +111,3 @@ cask "font-jetbrains-mono-nerd-font"
 cask "font-fira-code-nerd-font"
 cask "font-symbols-only-nerd-font"
 
-# =====================================================================
-# APPLICATIONS
-# =====================================================================
-# System utilities and applications
-
-cask "al-dente"               # Mac battery health manager
-cask "onyx"                   # System maintenance & optimization
