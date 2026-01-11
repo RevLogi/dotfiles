@@ -11,6 +11,9 @@
 # History
 #
 
+# Use the nightly version of neovim
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
+
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
 
@@ -100,6 +103,7 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # Initialize modules
 # ------------------
 
+zstyle ':zim:completion' dump_file "${ZDOTDIR:-${HOME}}/.zcompdump"
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 # Download zimfw plugin manager if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
@@ -122,13 +126,47 @@ source ${ZIM_HOME}/init.zsh
 # Quick Navigation
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
 alias code="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/code"
-alias home="cd"
-alias dl="cd Downloads"
+alias home="cd ~"
+alias dl="cd ~/Downloads"
+alias c="cd ~/Downloads/code"
+alias o="opencode"
 
 # Core Aliases
 alias s='fastfetch'
 alias v='vim'
 alias sz='source ~/.zshrc'
+alias nv='nvim'
+alias t='tmux'
 
-eval "$(starship init zsh)"
+function gemini() {
+    # 1. Detect macOS System Theme
+    # Returns "Dark" if dark mode is on, otherwise returns nothing or error
+    local mode=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
 
+    # 2. Select the appropriate Gemini CLI theme
+    # "Default" is the standard dark theme. "Default Light" is the light version.
+    if [[ "$mode" == "Dark" ]]; then
+        local theme="GitHub"
+    else
+        local theme="ANSI Light"
+    fi
+
+    # 3. Update the settings.json file automatically
+    # Uses sed to find the "theme" line and replace it with the detected one.
+    # This assumes your settings.json is in the default ~/.gemini/ location.
+    sed -i '' 's/"theme": "[^"]*"/"theme": "'"$theme"'"/' ~/.gemini/settings.json
+
+    # 4. Launch the actual Gemini CLI
+    command gemini "$@"
+}
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
+
+[ -f "/Users/liuguangxi/.ghcup/env" ] && . "/Users/liuguangxi/.ghcup/env" # ghcup-env
