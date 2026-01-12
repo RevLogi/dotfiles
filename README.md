@@ -53,18 +53,22 @@ dotfiles/
 │           ├── current-theme.conf
 │           ├── dark-theme.auto.conf
 │           └── light-theme.auto.conf
-├── nvim/                      → ~/.config/nvim (Neovim config)
-│   └── .config/
-│       └── nvim/
-│           ├── init.lua        (Main config file)
-│           ├── lua/
-│           │   ├── custom/
-│           │   │   └── plugins/ (User plugins)
-│           │   └── lsp/        (LSP configurations)
-│           ├── AGENTS.md       (Code style guidelines)
-│           └── README.md       (Neovim-specific docs)
-├── tmux/                      → ~/.tmux.conf (Tmux config)
-│   └── .tmux.conf
+ ├── nvim/                      → ~/.config/nvim (Neovim config)
+ │   └── .config/
+ │       └── nvim/
+ │           ├── init.lua        (Main config file)
+ │           ├── lua/
+ │           │   ├── custom/
+ │           │   │   └── plugins/ (User plugins)
+ │           │   └── lsp/        (LSP configurations)
+ │           ├── AGENTS.md       (Code style guidelines)
+ │           └── README.md       (Neovim-specific docs)
+ ├── opencode/                  → ~/.config/opencode (OpenCode AI coding agent)
+ │   └── .config/
+ │       └── opencode/
+ │           └── opencode.json  (OpenCode configuration)
+ ├── tmux/                      → ~/.tmux.conf (Tmux config)
+ │   └── .tmux.conf
 ├── vim/                       → ~/.vimrc (Vim config)
 │   └── .vimrc
 ├── zsh/                       → ~/.zshrc, ~/.zimrc (Shell config)
@@ -81,14 +85,15 @@ dotfiles/
 GNU Stow creates symbolic links from the dotfiles repository to your home directory:
 
 ```
-~/.zshrc          → ~/dotfiles/zsh/.zshrc
-~/.zimrc          → ~/dotfiles/zsh/.zimrc
-~/.tmux.conf      → ~/dotfiles/tmux/.tmux.conf
-~/.vimrc          → ~/dotfiles/vim/.vimrc
-~/.vim/           → ~/dotfiles/.vim/
-~/.config/kitty/  → ~/dotfiles/kitty/.config/kitty/
-~/.config/nvim/   → ~/dotfiles/nvim/.config/nvim/
-```
+ ~/.zshrc          → ~/dotfiles/zsh/.zshrc
+ ~/.zimrc          → ~/dotfiles/zsh/.zimrc
+ ~/.tmux.conf      → ~/dotfiles/tmux/.tmux.conf
+ ~/.vimrc          → ~/dotfiles/vim/.vimrc
+ ~/.vim/           → ~/dotfiles/.vim/
+ ~/.config/kitty/  → ~/dotfiles/kitty/.config/kitty/
+ ~/.config/nvim/   → ~/dotfiles/nvim/.config/nvim/
+ ~/.config/opencode/ → ~/dotfiles/opencode/.config/opencode/
+ ```
 
 This means you can:
 - Edit files in `~` directly (they're symlinks, changes propagate)
@@ -101,17 +106,18 @@ This means you can:
 
 Before setting up this dotfiles repository, ensure you have:
 
-- **macOS** operating system (tested on latest versions)
-- **Xcode Command Line Tools**
-  ```bash
-  xcode-select --install
-  ```
-- **Homebrew** package manager
-  ```bash
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  ```
-- **Git** version control (installed with Xcode tools or via Homebrew)
-- **GNU Stow** (installed via Homebrew in Brewfile)
+ - **macOS** operating system (tested on latest versions)
+ - **Xcode Command Line Tools**
+   ```bash
+   xcode-select --install
+   ```
+ - **Homebrew** package manager
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+ - **Git** version control (installed with Xcode tools or via Homebrew)
+ - **GNU Stow** (installed via Homebrew in Brewfile)
+ - **OpenCode** (optional, for AI coding assistance - installed via Homebrew in Brewfile)
 
 ---
 
@@ -149,7 +155,7 @@ GNU Stow creates symlinks to the appropriate locations in your home directory.
 
 ```bash
 # Stow all packages to create symlinks
-stow -t ~ zsh nvim tmux vim kitty
+stow -t ~ zsh nvim opencode tmux vim kitty
 
 # Verify symlinks were created
 ls -la ~ | grep -E "(zshrc|tmux.conf|vimrc)"
@@ -163,7 +169,7 @@ ls -la ~/.config | grep -E "(nvim|kitty)"
 brew bundle
 
 # This will install:
-# - 26 brew formulas (CLI tools, languages, libraries)
+# - 27 brew formulas (CLI tools, languages, libraries, OpenCode)
 # - 6 brew casks (applications, fonts)
 ```
 
@@ -340,7 +346,7 @@ cd ~/dotfiles
 git pull origin main
 
 # Restow packages to update any structure changes
-stow -R -t ~ zsh nvim tmux vim kitty
+stow -R -t ~ zsh nvim opencode tmux vim kitty
 
 # Reload shell configuration
 source ~/.zshrc
@@ -636,6 +642,49 @@ Other:
 - `dark-theme.auto.conf` - Dark theme configuration
 - `light-theme.auto.conf` - Light theme configuration
 
+### OpenCode
+
+**Location:** `opencode/.config/opencode/`
+
+**Purpose:** AI coding agent configuration
+
+**Key Features:**
+- **System theme**: Automatically adapts to terminal colors for seamless integration
+- **TUI settings**: macOS-style scroll acceleration, auto diff style
+- **Formatters**: Configured for Lua (stylua), C/C++ (clang-format), Markdown (markdownlint)
+- **File watcher**: Ignores build directories (node_modules, dist, .git, etc.)
+- **Context compaction**: Automatically compacts when context is full
+
+**Theme Behavior:**
+- Uses `system` theme that auto-adapts to terminal colors
+- Matches your Kitty's automatic theme switching (dark/light)
+- Generates grayscale based on terminal background
+- Uses ANSI colors for syntax highlighting
+
+**Configuration Options:**
+- **Theme**: "system" (auto-adapts)
+- **Autoupdate**: "notify" (notifies but doesn't auto-install)
+- **Formatters**: Stylua, clang-format, markdownlint
+- **Watcher ignore**: node_modules, dist, .git, build, .next
+
+**Usage:**
+```bash
+# Start OpenCode TUI
+opencode
+
+# Or use the alias
+o
+```
+
+**Installation:**
+```bash
+# Install via Homebrew (included in Brewfile)
+brew install anomalyco/tap/opencode
+```
+
+**Configuration:**
+Edit `~/.config/opencode/opencode.json` to customize behavior.
+
 ### Vim
 
 **Location:** `vim/.vimrc`
@@ -668,12 +717,12 @@ Other:
 **File:** `Brewfile`
 
 **Package Summary:**
-- 25 brew formulas
+- 27 brew formulas
 - 4 brew casks
-- 1 tap
+- 2 taps (narugit/tap, anomalyco/tap)
 
 **Categories:**
-1. Taps (narugit/tap)
+1. Taps (narugit/tap, anomalyco/tap)
 2. Core Development Tools (git, gcc, make, cmake)
 3. Terminal & Shell (tmux, kitty)
 4. Terminal Utilities (fzf, ripgrep, fd, tree, zoxide, yazi, fastfetch, ncdu, stow, htop, btop, jq, wget, mole, bat, eza)
@@ -682,7 +731,8 @@ Other:
 7. Package Managers (node, pnpm)
 8. Languages (openjdk)
 9. Development Libraries (imagemagick, ffmpeg, tesseract)
-10. Fonts (JetBrains Mono, Fira Code, Symbols Only - Nerd Fonts)
+10. AI & Development Assistants (opencode)
+11. Fonts (JetBrains Mono, Fira Code, Symbols Only - Nerd Fonts)
 
 **Usage:**
 ```bash
@@ -1156,7 +1206,7 @@ cd ~/dotfiles
 git pull origin main
 
 # Restow packages (if structure changed)
-stow -R -t ~ zsh nvim tmux vim kitty
+stow -R -t ~ zsh nvim opencode tmux vim kitty
 
 # Test on this machine
 # - If issues: fix, commit, push

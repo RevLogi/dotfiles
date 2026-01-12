@@ -93,6 +93,13 @@ brew "node"                   # JavaScript runtime
 brew "pnpm"                   # Fast, disk space efficient package manager
 
 # =====================================================================
+# AI & DEVELOPMENT ASSISTANTS
+# =====================================================================
+# AI tools and development assistants
+
+brew "anomalyco/tap/opencode"  # OpenCode AI coding agent
+
+# =====================================================================
 # LANGUAGES & RUNTIME
 # =====================================================================
 # Programming language runtimes
