@@ -57,7 +57,7 @@ brew "stow"                   # Symbolic link farm manager for dotfiles
 # System monitoring
 brew "htop"                   # Interactive process viewer
 brew "btop"                   # Modern process monitor
-brew "smctemp"                # CPU temperature for tmux status
+brew "narugit/tap/smctemp"   # CPU temperature for tmux status (from narugit tap)
 brew "osx-cpu-temp"           # macOS CPU temperature sensor
 
 # Text processing & utilities
