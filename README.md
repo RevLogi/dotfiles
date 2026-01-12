@@ -669,19 +669,20 @@ Other:
 
 **Package Summary:**
 - 25 brew formulas
-- 6 brew casks
+- 4 brew casks
+- 1 tap
 
 **Categories:**
-1. Core Development Tools (git, gcc, make, cmake)
-2. Terminal & Shell (tmux, kitty)
-3. Terminal Utilities (fzf, ripgrep, fd, tree, zoxide, yazi, fastfetch, ncdu, stow, htop, btop, jq, wget, mole, bat, eza)
-4. Editors & Tools (bob, emacs-app)
-5. GitHub & Version Control (gh)
-6. Package Managers (node, pnpm)
-7. Languages (openjdk)
-8. Development Libraries (imagemagick, ffmpeg, tesseract)
-9. Fonts (JetBrains Mono, Fira Code, Symbols Only - Nerd Fonts)
-10. Applications (AlDente, Onyx)
+1. Taps (narugit/tap)
+2. Core Development Tools (git, gcc, make, cmake)
+3. Terminal & Shell (tmux, kitty)
+4. Terminal Utilities (fzf, ripgrep, fd, tree, zoxide, yazi, fastfetch, ncdu, stow, htop, btop, jq, wget, mole, bat, eza)
+5. Editors & Tools (bob, emacs-app)
+6. GitHub & Version Control (gh)
+7. Package Managers (node, pnpm)
+8. Languages (openjdk)
+9. Development Libraries (imagemagick, ffmpeg, tesseract)
+10. Fonts (JetBrains Mono, Fira Code, Symbols Only - Nerd Fonts)
 
 **Usage:**
 ```bash

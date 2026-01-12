@@ -12,6 +12,13 @@
 # =====================================================================
 
 # =====================================================================
+# TAPS (Third-party repositories)
+# =====================================================================
+# Additional package repositories for specialized tools
+
+tap "narugit/tap"            # smctemp for CPU temperature monitoring
+
+# =====================================================================
 # CORE DEVELOPMENT TOOLS
 # =====================================================================
 # Essential build tools and version control for development
