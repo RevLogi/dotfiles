@@ -1,13 +1,3 @@
-# Dotfiles Configuration
-
-> Personal macOS dotfiles repository managed with GNU Stow and Git.
-
-**Repository:** https://github.com/RevLogi/dotfiles
-
-Complete macOS development environment: Zsh (Zim), Kitty, Neovim, Tmux, OrbStack, and modern CLI tools.
-
----
-
 ## Quick Start
 
 ```bash
@@ -124,14 +114,6 @@ git commit -m "Description of changes"
 git push origin main
 ```
 
-**Commit style:**
-```
-feat: add new tool
-fix: resolve bug
-refactor: simplify config
-docs: update README
-```
-
 ### Periodic Maintenance
 
 **Weekly:**
@@ -147,47 +129,3 @@ nvim +checkhealth +qa
 git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
 brew cleanup --prune=30
 ```
-
-### Common Commands
-
-**Shell aliases:**
-```bash
-icloud → ~/iCloud/code    # Navigate to iCloud code
-code   → ~/iCloud/code    # Alternative
-dl     → ~/Downloads       # Downloads
-c      → ~/Downloads/code  # Code in Downloads
-o      → opencode          # AI coding
-v      → vim               # Vim editor
-nv     → nvim              # Neovim
-t      → tmux              # Tmux
-s      → fastfetch         # System info
-sz     → source ~/.zshrc   # Reload shell
-```
-
-**Neovim:**
-```bash
-:Lazy              # Plugin manager
-:Lazy sync         # Sync plugins
-:checkhealth       # Check health
-```
-
-**Tmux:**
-```bash
-Ctrl-f h/j/k/l     Navigate panes
-Ctrl-f " / %       Split horizontal/vertical
-Ctrl-f c           New window
-Ctrl-f r           Reload config
-```
-
-**OrbStack:**
-```bash
-orb                # Start Linux shell
-orbctl list/start/stop  # Control VM
-docker ps          # Docker commands
-```
-
----
-
-**Last Updated:** January 14, 2026
-**Maintainer:** @RevLogi
-**Repository:** https://github.com/RevLogi/dotfiles
