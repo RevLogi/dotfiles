@@ -43,56 +43,63 @@ All configurations are symlinked to their appropriate locations using GNU Stow, 
 
 ```
 dotfiles/
-├── .vim/                      → ~/.vim (Vim plugins directory)
-│   └── after/
-│       └── ftplugin/          (Language-specific Vim configs)
-├── kitty/                     → ~/.config/kitty (Terminal emulator)
-│   └── .config/
-│       └── kitty/
-│           ├── kitty.conf     (Main configuration)
-│           ├── current-theme.conf
-│           ├── dark-theme.auto.conf
-│           └── light-theme.auto.conf
- ├── nvim/                      → ~/.config/nvim (Neovim config)
+ ├── .vim/                      → ~/.vim (Vim plugins directory)
+ │   └── after/
+ │       └── ftplugin/          (Language-specific Vim configs)
+ ├── kitty/                     → ~/.config/kitty (Terminal emulator)
  │   └── .config/
- │       └── nvim/
- │           ├── init.lua        (Main config file)
- │           ├── lua/
- │           │   ├── custom/
- │           │   │   └── plugins/ (User plugins)
- │           │   └── lsp/        (LSP configurations)
- │           ├── AGENTS.md       (Code style guidelines)
- │           └── README.md       (Neovim-specific docs)
+ │       └── kitty/
+ │           ├── kitty.conf     (Main configuration)
+ │           ├── current-theme.conf
+ │           ├── dark-theme.auto.conf
+ │           └── light-theme.auto.conf
+  ├── nvim/                      → ~/.config/nvim (Neovim config)
+  │   └── .config/
+  │       └── nvim/
+  │           ├── init.lua        (Main config file)
+  │           ├── lua/
+  │           │   ├── custom/
+  │           │   │   └── plugins/ (User plugins)
+  │           │   └── lsp/        (LSP configurations)
+  │           ├── AGENTS.md       (Code style guidelines)
+  │           └── README.md       (Neovim-specific docs)
  ├── opencode/                  → ~/.config/opencode (OpenCode AI coding agent)
  │   └── .config/
  │       └── opencode/
  │           └── opencode.json  (OpenCode configuration)
+ ├── orbstack/                  → ~/.orbstack (OrbStack configuration - manual sync)
+ │   └── .orbstack/
+ │       ├── vmconfig.json      (VM configuration)
+ │       ├── vmstate.json      (VM state - excluded from git)
+ │       ├── config/           (Additional configs)
+ │       └── bin/               (Binary symlinks)
  ├── tmux/                      → ~/.tmux.conf (Tmux config)
  │   └── .tmux.conf
-├── vim/                       → ~/.vimrc (Vim config)
-│   └── .vimrc
-├── zsh/                       → ~/.zshrc, ~/.zimrc (Shell config)
-│   ├── .zshrc
-│   ├── .zimrc
-│   └── .zshrc-e
-├── Brewfile                   (Homebrew packages and casks)
-├── .gitignore                 (Files to exclude from git)
-└── README.md                  (This manual)
-```
+ ├── vim/                       → ~/.vimrc (Vim config)
+ │   └── .vimrc
+ ├── zsh/                       → ~/.zshrc, ~/.zimrc (Shell config)
+ │   ├── .zshrc
+ │   ├── .zimrc
+ │   └── .zshrc-e
+ ├── Brewfile                   (Homebrew packages and casks)
+ ├── .gitignore                 (Files to exclude from git)
+ └── README.md                  (This manual)
+ ```
 
 ### Symlink Structure
 
 GNU Stow creates symbolic links from the dotfiles repository to your home directory:
 
 ```
- ~/.zshrc          → ~/dotfiles/zsh/.zshrc
- ~/.zimrc          → ~/dotfiles/zsh/.zimrc
- ~/.tmux.conf      → ~/dotfiles/tmux/.tmux.conf
- ~/.vimrc          → ~/dotfiles/vim/.vimrc
- ~/.vim/           → ~/dotfiles/.vim/
- ~/.config/kitty/  → ~/dotfiles/kitty/.config/kitty/
- ~/.config/nvim/   → ~/dotfiles/nvim/.config/nvim/
- ~/.config/opencode/ → ~/dotfiles/opencode/.config/opencode/
+  ~/.zshrc          → ~/dotfiles/zsh/.zshrc
+  ~/.zimrc          → ~/dotfiles/zsh/.zimrc
+  ~/.tmux.conf      → ~/dotfiles/tmux/.tmux.conf
+  ~/.vimrc          → ~/dotfiles/vim/.vimrc
+  ~/.vim/           → ~/dotfiles/.vim/
+  ~/.orbstack/      → ~/dotfiles/orbstack/.orbstack/ (manual sync)
+  ~/.config/kitty/  → ~/dotfiles/kitty/.config/kitty/
+  ~/.config/nvim/   → ~/dotfiles/nvim/.config/nvim/
+  ~/.config/opencode/ → ~/dotfiles/opencode/.config/opencode/
  ```
 
 This means you can:
@@ -155,11 +162,11 @@ GNU Stow creates symlinks to the appropriate locations in your home directory.
 
 ```bash
 # Stow all packages to create symlinks
-stow -t ~ zsh nvim opencode tmux vim kitty
+stow -t ~ zsh nvim opencode orbstack tmux vim kitty
 
 # Verify symlinks were created
-ls -la ~ | grep -E "(zshrc|tmux.conf|vimrc)"
-ls -la ~/.config | grep -E "(nvim|kitty)"
+ls -la ~ | grep -E "(zshrc|tmux.conf|vimrc|orbstack)"
+ls -la ~/.config | grep -E "(nvim|kitty|opencode)"
 ```
 
 ### Step 4: Install Homebrew Packages
@@ -696,6 +703,55 @@ brew install anomalyco/tap/opencode
 **Configuration:**
 Edit `~/.config/opencode/opencode.json` to customize behavior.
 
+### OrbStack
+
+**Location:** `~/.orbstack/` (manually synced, not managed by Stow)
+
+**Purpose:** Docker containerization and Linux VM runtime for macOS
+
+**Key Features:**
+- **Docker integration**: Native Docker and Docker Compose support
+- **Linux VM**: Full Linux environment with SSH access
+- **Performance**: Faster and lighter than Docker Desktop
+- **Resource efficient**: Minimal CPU and memory overhead
+
+**Binary Symlinks:**
+- `/usr/local/bin/orb` - OrbStack control command
+- `/usr/local/bin/orbctl` - OrbStack control CLI
+- `/usr/local/bin/docker` - Docker CLI
+- `/usr/local/bin/docker-compose` - Docker Compose CLI
+- `/usr/local/bin/kubectl` - Kubernetes CLI
+
+**Usage Examples:**
+```bash
+# Start a Linux shell
+orb
+
+# Run commands in Linux
+orb uname -a
+
+# Control OrbStack machines
+orbctl list          # List machines
+orbctl start         # Start OrbStack
+orbctl stop          # Stop OrbStack
+
+# Docker operations
+docker ps
+docker build -t myapp .
+docker run -it myapp
+
+# SSH into Linux VM
+orbctl ssh
+```
+
+**Configuration:**
+- `~/.orbstack/vmconfig.json` - VM settings (CPU, memory, disk)
+- `~/.orbstack/config/docker.json` - Docker-specific settings
+- Configuration is manually synced (not in stow)
+
+**Note:**
+OrbStack configs are tracked separately and synced manually to avoid version control issues with transient state files (vmstate.json, logs, etc.). Only edit vmconfig.json when needed for system resources.
+
 ### Vim
 
 **Location:** `vim/.vimrc`
@@ -729,13 +785,13 @@ Edit `~/.config/opencode/opencode.json` to customize behavior.
 
 **Package Summary:**
 - 27 brew formulas
-- 4 brew casks
+- 5 brew casks
 - 2 taps (narugit/tap, anomalyco/tap)
 
 **Categories:**
 1. Taps (narugit/tap, anomalyco/tap)
 2. Core Development Tools (git, gcc, make, cmake)
-3. Terminal & Shell (tmux, kitty)
+3. Terminal & Shell (tmux, kitty, orbstack)
 4. Terminal Utilities (fzf, ripgrep, fd, tree, zoxide, yazi, fastfetch, ncdu, stow, htop, btop, jq, wget, mole, bat, eza)
 5. Editors & Tools (bob, emacs-app)
 6. GitHub & Version Control (gh)
