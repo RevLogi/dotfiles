@@ -187,7 +187,16 @@ source ~/.zshrc
 # - Initialize modules
 ```
 
-### Step 6: Install Tmux Plugins
+### Step 6: Install Tmux Plugin Manager (TPM) and Plugins
+
+First, clone TPM (Tmux Plugin Manager) manually:
+
+```bash
+# Clone TPM to the correct location
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Then install all configured plugins:
 
 ```bash
 # Install Tmux Plugin Manager and plugins
@@ -196,6 +205,8 @@ source ~/.zshrc
 # Then reload tmux configuration
 tmux source-file ~/.tmux.conf
 ```
+
+**Note:** TPM is not available via Homebrew and must be cloned via git. Your `tmux.conf` will automatically initialize TPM when loaded.
 
 ### Step 7: Install Neovim Plugins and Tools
 
@@ -746,6 +757,11 @@ brew bundle check
 brew bundle install --cleanup
 ```
 
+**Note on Tmux Plugins:**
+- TPM (Tmux Plugin Manager) is not available via Homebrew
+- Install via git: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+- Then install plugins: `~/.tmux/plugins/tpm/bin/install_plugins`
+
 ---
 
 ## Custom Functions and Aliases
@@ -859,6 +875,18 @@ stow -t ~ zsh
 ```
 
 ### Tmux Issues
+
+**Problem:** TPM directory doesn't exist
+```bash
+# Solution: Clone TPM first
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Then install plugins
+~/.tmux/plugins/tpm/bin/install_plugins
+
+# Reload tmux
+tmux source-file ~/.tmux.conf
+```
 
 **Problem:** Plugins not loaded
 ```bash
