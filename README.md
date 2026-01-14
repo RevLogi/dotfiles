@@ -8,17 +8,6 @@ Complete macOS development environment: Zsh (Zim), Kitty, Neovim, Tmux, OrbStack
 
 ---
 
-## Table of Contents
-
-- [Quick Start](#quick-start)
-- [Directory Structure](#directory-structure)
-- [Setup on New Mac](#setup-on-new-mac)
-- [Key Components](#key-components)
-- [Daily Usage](#daily-usage)
-- [Troubleshooting](#troubleshooting)
-
----
-
 ## Quick Start
 
 ```bash
@@ -83,181 +72,6 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 5. **Install TPM:** `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 6. **Install tmux plugins:** `~/.tmux/plugins/tpm/bin/install_plugins`
 7. **Install Neovim plugins:** `nvim +Lazy sync +qa`
-
-### Verification
-
-```bash
-# Test tools
-which zsh nvim tmux kitty docker orb
-nvim --version && tmux -V
-which fzf fd ripgrep bat eza
-
-# Verify fonts
-fc-list | grep -i "jetbrains\|fira\|nerd"
-```
-
----
-
-## Key Components
-
-### Zsh & Zim Framework
-
-**Location:** `zsh/.zshrc`, `zsh/.zimrc`
-
-**Features:**
-- Vi mode, autosuggestions, syntax highlighting, history search (Ctrl+R)
-- Asciiship minimal prompt
-- Zim modules: environment, git, utility, completions, asciiship
-
-**Custom Aliases:**
-```bash
-icloud → ~/iCloud/code    # Navigate to iCloud code
-code   → ~/iCloud/code    # Alternative
-dl     → ~/Downloads       # Downloads
-c      → ~/Downloads/code  # Code in Downloads
-o      → opencode          # AI coding
-v      → vim               # Vim editor
-nv     → nvim              # Neovim
-t      → tmux              # Tmux
-s      → fastfetch         # System info
-sz     → source ~/.zshrc   # Reload shell
-```
-
-### Neovim
-
-**Location:** `nvim/.config/nvim/`
-
-**Based on:** kickstart.nvim (modular, Lua)
-
-**Plugin Manager:** lazy.nvim
-
-**Key Features:**
-- LSP: lua_ls, ts_ls, jsonls, pyright, vimls, clangd
-- Fuzzy finding: Telescope
-- Completion: Blink.cmp
-- Git: Gitsigns
-- File explorer: Neo-tree
-- Formatting: Conform.nvim (stylua, clang-format)
-- Debugging: nvim-dap
-- LeetCode integration
-
-**Key Mappings:**
-- `<space>` - Leader key
-- `<Ctrl-h/j/k/l>` - Navigate windows
-- `<space>f[f|g|b|h]` - Find files/grep/buffers/help
-- `<leader>e` - Floating diagnostics
-- `<leader>k` - Hover documentation
-
-**Managing Plugins:** `:Lazy` (sync, clean, update)
-
-### Tmux
-
-**Location:** `tmux/.tmux.conf`
-
-**Prefix:** `Ctrl-f` (instead of Ctrl-b)
-
-**Plugin Manager:** TPM (`~/.tmux/plugins/tpm`)
-
-**Plugins:**
-- tmux-yank (clipboard)
-- vim-tmux-navigator (seamless Vim/Tmux nav)
-- tmux-cpu (status bar CPU/RAM)
-
-**Key Bindings:**
-```
-Ctrl-f h/j/k/l       Navigate panes
-Ctrl-f " / %          Split horizontal/vertical
-Ctrl-f c              New window
-Ctrl-f w              Choose window
-Ctrl-f r              Reload config
-Shift + Arrows        Resize panes
-```
-
-**Managing Plugins:**
-```bash
-~/.tmux/plugins/tpm/bin/install_plugins
-~/.tmux/plugins/tpm/bin/update_plugins all
-```
-
-### Kitty
-
-**Location:** `kitty/.config/kitty/`
-
-**Theme:** Catppuccin-Frappe (auto-switches with macOS)
-
-**Font:** JetBrainsMono Nerd Font Mono, size 16
-
-**Features:**
-- Tab bar, titlebar-only decorations
-- Remote control (for image.nvim)
-
-### OpenCode
-
-**Location:** `opencode/.config/opencode/`
-
-**Purpose:** AI coding assistant
-
-**Features:**
-- Auto-adapts to terminal theme
-- Formatters: stylua, clang-format, markdownlint
-- Ignores: node_modules, dist, .git
-
-**Usage:** `opencode` or alias `o`
-
-### OrbStack
-
-**Location:** `orbstack/.orbstack/` (manually synced)
-
-**Purpose:** Docker & Linux VM for macOS
-
-**Features:**
-- Native Docker/Compose support
-- Lightweight Linux VM with SSH
-- Faster/lighter than Docker Desktop
-
-**Binary Symlinks:** orb, orbctl, docker, docker-compose, kubectl
-
-**Usage:**
-```bash
-orb                    # Start Linux shell
-orbctl list/start/stop # Control VM
-docker ps              # Docker commands
-orbctl ssh             # SSH into VM
-```
-
-**Manual Sync:** Copy `vmconfig.json` and `config/docker.json` to dotfiles before committing.
-
-### Vim
-
-**Location:** `vim/.vimrc`
-
-**Purpose:** Minimal Vim (secondary to Neovim)
-
-**Features:** Line numbers, 80-char column, vim-slime, trailing whitespace highlighting, hard mode (no arrows)
-
-**Plugins:** vim-slime, vim-surround, vim-trailing-whitespace
-
-### Homebrew
-
-**File:** `Brewfile`
-
-**Packages:** 27 formulas, 5 casks, 2 taps
-
-**Categories:**
-- Core: git, gcc, make, cmake
-- Shell: tmux, kitty, orbstack
-- Utilities: fzf, ripgrep, fd, yazi, fastfetch, bat, eza, zoxide
-- Editors: bob (neovim), emacs-app
-- Dev: node, pnpm, gh, openjdk
-- AI: opencode
-- Fonts: JetBrains Mono, Fira Code, Nerd Fonts
-
-**Usage:**
-```bash
-brew bundle              # Install all
-brew bundle check        # Check installed
-brew bundle install      # Install missing
-```
 
 ---
 
@@ -334,84 +148,43 @@ git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git b
 brew cleanup --prune=30
 ```
 
----
+### Common Commands
 
-## Troubleshooting
+**Shell aliases:**
+```bash
+icloud → ~/iCloud/code    # Navigate to iCloud code
+code   → ~/iCloud/code    # Alternative
+dl     → ~/Downloads       # Downloads
+c      → ~/Downloads/code  # Code in Downloads
+o      → opencode          # AI coding
+v      → vim               # Vim editor
+nv     → nvim              # Neovim
+t      → tmux              # Tmux
+s      → fastfetch         # System info
+sz     → source ~/.zshrc   # Reload shell
+```
 
-### Stow Issues
+**Neovim:**
+```bash
+:Lazy              # Plugin manager
+:Lazy sync         # Sync plugins
+:checkhealth       # Check health
+```
 
-**"stow: command not found"** → `brew install stow`
+**Tmux:**
+```bash
+Ctrl-f h/j/k/l     Navigate panes
+Ctrl-f " / %       Split horizontal/vertical
+Ctrl-f c           New window
+Ctrl-f r           Reload config
+```
 
-**"target is not a directory"** → `mkdir -p ~/.config`
-
-**Conflicts with existing files** → Backup and remove, then restow
-
-### Neovim Issues
-
-**Plugins not loading** → `:Lazy sync`
-
-**LSP servers not working** → `:Mason` to install/check
-
-**Tree-sitter issues** → `:TSUpdate`
-
-**Health check** → `:checkhealth`
-
-### Tmux Issues
-
-**TPM missing** → `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
-
-**Plugins not loaded** → `~/.tmux/plugins/tpm/bin/install_plugins` and `tmux source-file ~/.tmux.conf`
-
-**CPU/RAM not showing** → Check tmux-cpu: `ls ~/.tmux/plugins/tmux-cpu/`
-
-### Zsh/Zim Issues
-
-**Zim not loading** → `source ~/.zimfw.zsh init`
-
-**Asciiship not working** → Check `ls ~/.zim/modules/asciiship` and verify in `.zimrc`
-
-**Autosuggestions broken** → `rm ~/.zcompdump* && exec zsh`
-
-### Homebrew Issues
-
-**Package install failed** → `brew update && brew doctor`
-
-**Outdated packages** → `brew upgrade && brew cleanup`
-
-### Git Issues
-
-**Permission denied pushing** → `git remote set-url origin git@github.com:RevLogi/dotfiles.git`
-
-**Merge conflicts** → Resolve in editor, `git add <files>`, `git commit`
-
-### Font Issues
-
-**Icons not showing** → Verify: `brew list --cask | grep font`, reinstall via `brew bundle`
-
-**Fonts wrong** → `fc-cache -fv` and restart terminal
-
----
-
-## Additional Resources
-
-- **Neovim:** `:help` or https://neovim.io/doc/
-- **Tmux:** `man tmux` or https://github.com/tmux/tmux/wiki
-- **Zsh/Zim:** https://github.com/zimfw/zimfw
-- **Kitty:** https://sw.kovidgoyal.net/kitty/
-- **Stow:** https://www.gnu.org/software/stow/
-- **Homebrew:** https://docs.brew.sh/
-
----
-
-## License
-
-Personal dotfiles repository. Use as inspiration for your own setup.
-
----
-
-## Contributing
-
-Suggestions welcome! Fork, create feature branch, test thoroughly, submit PR.
+**OrbStack:**
+```bash
+orb                # Start Linux shell
+orbctl list/start/stop  # Control VM
+docker ps          # Docker commands
+```
 
 ---
 
