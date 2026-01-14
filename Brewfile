@@ -35,6 +35,7 @@ brew "cmake"                  # Cross-platform build system generator
 
 brew "tmux"                   # Terminal multiplexer
 cask "kitty"                  # GPU-accelerated terminal emulator
+cask "orbstack"               # Docker & Linux VM runtime
 
 # =====================================================================
 # TERMINAL UTILITIES & PRODUCTIVITY

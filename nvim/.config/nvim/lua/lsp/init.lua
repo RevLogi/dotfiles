@@ -12,13 +12,7 @@ vim.diagnostic.config {
       [vim.diagnostic.severity.HINT] = '󰌶 ',
     },
   } or {},
-  virtual_text = {
-    source = 'if_many',
-    spacing = 2,
-    format = function(diagnostic)
-      return diagnostic.message
-    end,
-  },
+  virtual_text = false,
 }
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -77,6 +71,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
       end, '[T]oggle Inlay [H]ints')
     end
+
+    map('<leader>e', vim.diagnostic.open_float, 'Show floating diagnostics')
   end,
 })
 
