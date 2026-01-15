@@ -8,7 +8,7 @@ git clone https://github.com/RevLogi/dotfiles.git ~/dotfiles && cd ~/dotfiles
 brew bundle
 
 # 3. Create symlinks with Stow
-stow -t ~ zsh nvim opencode orbstack tmux vim kitty
+stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh
 
 # 4. Initialize plugins
 source ~/.zshrc                                        # Install Zim
@@ -27,6 +27,7 @@ dotfiles/
  ├── nvim/             → ~/.config/nvim (Neovim config)
  ├── tmux/             → ~/.tmux.conf (Tmux config)
  ├── kitty/            → ~/.config/kitty (Terminal)
+ ├── gh/               → ~/.config/gh (GitHub CLI)
  ├── vim/              → ~/.vimrc (Vim config)
  ├── opencode/         → ~/.config/opencode (AI coding)
  ├── orbstack/         → ~/.orbstack/ (Docker/Linux VM - manual sync)
@@ -57,7 +58,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 1. **Clone repository:** `git clone https://github.com/RevLogi/dotfiles.git ~/dotfiles`
 2. **Install packages:** `cd ~/dotfiles && brew bundle`
-3. **Create symlinks:** `stow -t ~ zsh nvim opencode orbstack tmux vim kitty`
+3. **Create symlinks:** `stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh`
 4. **Install Zim:** `source ~/.zshrc` (auto-installs on first load)
 5. **Install TPM:** `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 6. **Install tmux plugins:** `~/.tmux/plugins/tpm/bin/install_plugins`
@@ -101,7 +102,7 @@ stow -D -t ~ unwantedapp && rm -rf unwantedapp
 ```bash
 cd ~/dotfiles
 git pull origin main
-stow -R -t ~ zsh nvim opencode orbstack tmux vim kitty
+stow -R -t ~ zsh nvim opencode orbstack tmux vim kitty gh
 source ~/.zshrc && tmux source-file ~/.tmux.conf
 ```
 
