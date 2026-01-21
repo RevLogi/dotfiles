@@ -125,13 +125,12 @@ source ${ZIM_HOME}/init.zsh
 
 # Quick Navigation
 alias icloud="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/"
-alias code="cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/code"
-alias home="cd ~"
 alias dl="cd ~/Downloads"
-alias c="cd ~/Downloads/code"
-alias o="opencode"
+alias d="cd ~/Developer"
+alias c="cd ~/Developer/Projects"
 
 # Core Aliases
+alias o="opencode"
 alias s='fastfetch'
 alias v='vim'
 alias sz='source ~/.zshrc'
@@ -170,3 +169,5 @@ function y() {
 
 
 [ -f "/Users/liuguangxi/.ghcup/env" ] && . "/Users/liuguangxi/.ghcup/env" # ghcup-env
+eval "$(zoxide init zsh)"
+

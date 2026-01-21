@@ -85,11 +85,15 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
+-- is not what someone would guess without a bit more experience.
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+
+-- Open oil file explorer
+vim.keymap.set('n', '-', '<CMD>Oil --float<CR>', { desc = 'Open parent directory' })
+vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open current directory' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -145,6 +149,17 @@ vim.api.nvim_create_autocmd('FileType', {
   callback = function()
     vim.opt_local.shiftwidth = 4
     vim.opt_local.tabstop = 4
+    vim.opt_local.expandtab = true
+    vim.opt_local.smartindent = true
+  end,
+})
+
+-- Set 2-space indentation for Lua files (community standard)
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'lua' },
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
     vim.opt_local.expandtab = true
     vim.opt_local.smartindent = true
   end,

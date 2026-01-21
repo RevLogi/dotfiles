@@ -65,6 +65,7 @@ brew "osx-cpu-temp"           # macOS CPU temperature sensor
 brew "jq"                     # Lightweight JSON processor
 brew "wget"                   # Network downloader
 brew "mole"                   # SSH connection manager
+brew "tldr"                   # Simplified man pages
 
 # Modern CLI enhancements
 brew "bat"                    # cat clone with syntax highlighting and Git integration
@@ -78,12 +79,16 @@ brew "eza"                    # Modern, maintained replacement for ls
 brew "bob"                    # Neovim version manager (PATH in .zshrc)
 cask "emacs-app"              # GNU Emacs text editor
 
+# Language formatters & linters
+brew "stylua"                 # Lua code formatter
+
 # =====================================================================
 # GITHUB & VERSION CONTROL
 # =====================================================================
 # GitHub CLI for terminal-based GitHub operations
 
 brew "gh"                     # GitHub command-line tool
+brew "lazygit"                # Terminal UI for git operations
 
 # =====================================================================
 # PACKAGE MANAGERS
