@@ -1,6 +1,5 @@
 -- Neo-tree is a Neovim plugin to browse the file system
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
--- DISABLED: Migrated to oil.nvim
 
 return {
   'nvim-neo-tree/neo-tree.nvim',
@@ -11,7 +10,7 @@ return {
     'nvim-tree/nvim-web-devicons',
     'MunifTanjim/nui.nvim',
   },
-  lazy = false,
+  lazy = true,
   keys = {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },

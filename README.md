@@ -8,7 +8,7 @@ git clone https://github.com/RevLogi/dotfiles.git ~/dotfiles && cd ~/dotfiles
 brew bundle
 
 # 3. Create symlinks with Stow
-stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh
+stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh hammerspoon
 
 # 4. Initialize plugins
 source ~/.zshrc                                        # Install Zim
@@ -31,6 +31,7 @@ dotfiles/
  ├── vim/              → ~/.vimrc (Vim config)
  ├── opencode/         → ~/.config/opencode (AI coding)
  ├── orbstack/         → ~/.orbstack/ (Docker/Linux VM - manual sync)
+ ├── hammerspoon/      → ~/.hammerspoon/ (macOS automation)
  ├── .vim/             → ~/.vim/ (Vim plugins)
  ├── Brewfile          (Homebrew packages)
  ├── .gitignore        (Excluded files)
@@ -58,11 +59,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 1. **Clone repository:** `git clone https://github.com/RevLogi/dotfiles.git ~/dotfiles`
 2. **Install packages:** `cd ~/dotfiles && brew bundle`
-3. **Create symlinks:** `stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh`
+3. **Create symlinks:** `stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh hammerspoon`
 4. **Install Zim:** `source ~/.zshrc` (auto-installs on first load)
 5. **Install TPM:** `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
 6. **Install tmux plugins:** `~/.tmux/plugins/tpm/bin/install_plugins`
 7. **Install Neovim plugins:** `nvim +Lazy sync +qa`
+8. **Configure Hammerspoon:** Set `GLM_API_KEY` environment variable (see hammerspoon/.env.example)
 
 ---
 
@@ -102,7 +104,7 @@ stow -D -t ~ unwantedapp && rm -rf unwantedapp
 ```bash
 cd ~/dotfiles
 git pull origin main
-stow -R -t ~ zsh nvim opencode orbstack tmux vim kitty gh
+stow -R -t ~ zsh nvim opencode orbstack tmux vim kitty gh hammerspoon
 source ~/.zshrc && tmux source-file ~/.tmux.conf
 ```
 
@@ -129,4 +131,52 @@ nvim +Lazy sync +qa
 nvim +checkhealth +qa
 git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git branch -D
 brew cleanup --prune=30
+```
+
+---
+
+## Hammerspoon Configuration
+
+Hammerspoon is a macOS automation tool that allows you to control your system using Lua scripts.
+
+### Available Features
+
+**Application Launcher** (applauncher.lua)
+- Press `Alt + [key]` to launch/focus applications:
+  - `Alt + S`: Safari
+  - `Alt + K`: kitty
+  - `Alt + O`: Obsidian
+  - `Alt + W`: WeChat
+
+**Text Refinement** (languagetool.lua)
+- Press `Alt + R` to refine selected text using GLM-4.7 API
+- Automatically copies selected text (or clipboard contents), refines it via API, and pastes the result
+
+### API Key Configuration
+
+To enable text refinement, you need to set your GLM-4.7 API key:
+
+```bash
+# Option 1: Add to ~/.zshrc
+echo 'export GLM_API_KEY="your_api_key_here"' >> ~/.zshrc
+source ~/.zshrc
+
+# Option 2: Set temporarily for current session
+export GLM_API_KEY="your_api_key_here"
+```
+
+Get your API key from: https://open.bigmodel.cn/
+
+### Configuration Location
+
+Edit Hammerspoon configs directly in your home directory (symlinked to dotfiles):
+```bash
+vim ~/.hammerspoon/init.lua
+# Changes propagate to ~/dotfiles/hammerspoon/.hammerspoon/init.lua
+```
+
+After editing, reload Hammerspoon config:
+```bash
+hs.reload()
+# Or click the Hammerspoon menu bar icon and select "Reload Config"
 ```

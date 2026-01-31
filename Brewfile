@@ -17,6 +17,7 @@
 # Additional package repositories for specialized tools
 
 tap "narugit/tap"            # smctemp for CPU temperature monitoring
+tap "anomalyco/tap"          # OpenCode AI coding agent
 
 # =====================================================================
 # CORE DEVELOPMENT TOOLS
@@ -71,16 +72,29 @@ brew "tldr"                   # Simplified man pages
 brew "bat"                    # cat clone with syntax highlighting and Git integration
 brew "eza"                    # Modern, maintained replacement for ls
 
+# macOS automation
+cask "hammerspoon"            # macOS automation tool
+cask "karabiner-elements"     # Keyboard customization for macOS
+
 # =====================================================================
 # EDITORS & TOOLS
 # =====================================================================
 # Text editors and version managers
 
 brew "bob"                    # Neovim version manager (PATH in .zshrc)
+brew "neovim"                 # Modern Vim-based text editor
 cask "emacs-app"              # GNU Emacs text editor
 
 # Language formatters & linters
 brew "stylua"                 # Lua code formatter
+
+# =====================================================================
+# NOTES & KNOWLEDGE
+# =====================================================================
+# Knowledge base and note-taking applications
+
+cask "obsidian"               # Knowledge base and note-taking app
+cask "typora"                 # Minimal markdown editor
 
 # =====================================================================
 # GITHUB & VERSION CONTROL
@@ -103,7 +117,7 @@ brew "pnpm"                   # Fast, disk space efficient package manager
 # =====================================================================
 # AI tools and development assistants
 
-brew "anomalyco/tap/opencode"  # OpenCode AI coding agent
+brew "opencode"  # OpenCode AI coding agent
 
 # =====================================================================
 # LANGUAGES & RUNTIME

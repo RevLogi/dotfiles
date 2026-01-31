@@ -1,0 +1,3 @@
+require("applauncher")
+require("languagetool")
+
