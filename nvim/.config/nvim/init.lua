@@ -102,7 +102,7 @@ vim.keymap.set('n', '<leader>e', '<CMD>Oil<CR>', { desc = 'Open current director
 -- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Command bar place
-vim.o.cmdheight = 0
+vim.o.cmdheight = 1
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
@@ -127,7 +127,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Set auto-save
 local autosave_group = vim.api.nvim_create_augroup('AutoSaveGroup', { clear = true })
 
-vim.api.nvim_create_autocmd({ 'InsertLeave', 'TextChanged' }, {
+vim.api.nvim_create_autocmd('InsertLeave', {
   group = autosave_group,
   pattern = '*',
   callback = function()

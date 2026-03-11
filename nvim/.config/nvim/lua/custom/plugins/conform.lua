@@ -20,6 +20,16 @@ return {
         lsp_format = 'fallback',
       }
     end,
+    formatters = {
+      clang_format = {
+        command = 'clang-format',
+        args = {
+          '-style=file:/Users/liuguangxi/dotfiles/nvim/.config/nvim/.clang-format',
+          '-i',
+          '$FILENAME',
+        },
+      },
+    },
     formatters_by_ft = {
       lua = { 'stylua' },
       c = { 'clang-format' },

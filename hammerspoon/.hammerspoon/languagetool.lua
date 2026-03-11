@@ -1,37 +1,111 @@
--- CONFIGURATION
--- Helper function to load API key from .env file
-local function loadEnvFile()
-	local envFile = "/Users/liuguangxi/envfiles/.env"
+-- ============================================================
+-- Language Tool: Text Refinement using LLMs
+-- ============================================================
+-- Requires: config.lua in ~/.hammerspoon/
+-- API keys: Set in .env file or environment variables
+
+local configPath = hs.configdir .. "/config.lua"
+
+-- Load config
+local config = {}
+local ok, err = pcall(function()
+	config = dofile(configPath)
+end)
+
+if not ok or not config.providers then
+	hs.alert.show("Error loading config.lua!\n" .. (err or "File not found"))
+	return
+end
+
+-- Helper: Load API key from .env file or environment
+local function loadApiKey(envKey)
+	local envFile = os.getenv("HOME") .. "/.env"
 	local file = io.open(envFile, "r")
 	if file then
 		for line in file:lines() do
-			local value = line:match("^GLM_API_KEY=(.+)$")
+			local value = line:match("^" .. envKey .. "=(.+)$")
 			if value then
 				value = value:match("^%s*(.-)%s*$")
 				value = value:gsub("^['\"]", ""):gsub("['\"]$", "")
+				file:close()
 				return value
 			end
 		end
 		file:close()
 	end
-	return nil
+	return os.getenv(envKey)
 end
 
--- API Key loaded from .env file or environment variable
-local apiKey = loadEnvFile() or os.getenv("GLM_API_KEY")
+-- Helper: Get enabled provider
+local function getProvider(name)
+	local p = config.providers[name]
+	if not p or not p.enabled then
+		return nil
+	end
 
-if not apiKey then
-	hs.alert.show("GLM API Key not found! Please set GLM_API_KEY in .env file")
+	local apiKey = loadApiKey(p.env_key)
+	if not apiKey then
+		hs.alert.show(p.name .. " API key not found!\nSet " .. p.env_key .. " in .env")
+		return nil
+	end
+
+	return {
+		name = p.name,
+		endpoint = p.endpoint,
+		model = p.model,
+		apiKey = apiKey,
+	}
 end
 
--- ZhipuAI's OpenAI-Compatible Endpoint
-local modelEndpoint = "https://open.bigmodel.cn/api/paas/v4/chat/completions"
+-- Helper: Build request body based on provider
+local function buildRequestBody(provider, model, systemPrompt, userText, temperature)
+	local body = {}
 
--- The Prompt
-local systemPrompt =
-	"You are a helpful assistant. Rewrite the following text to be concise, natural, and professional English. Do not explain, just output the rewrite."
+	if provider == "minimax" then
+		body = {
+			model = model,
+			messages = {
+				{ role = "system", content = systemPrompt },
+				{ role = "user", content = userText },
+			},
+			temperature = temperature,
+		}
+	else
+		-- GLM and other OpenAI-compatible providers
+		body = {
+			model = model,
+			messages = {
+				{ role = "system", content = systemPrompt },
+				{ role = "user", content = userText },
+			},
+			temperature = temperature,
+		}
+	end
 
-local function refineText()
+	return body
+end
+
+-- Helper: Extract refined text from response
+local function extractResponse(provider, responseBody)
+	local data = hs.json.decode(responseBody)
+
+	if provider == "minimax" then
+		return data.choices[1].message.content
+	else
+		-- GLM and OpenAI-compatible
+		return data.choices[1].message.content
+	end
+end
+
+-- Main: Refine text function
+local function refineText(providerName)
+	local providerCfg = providerName or config.refine.default_provider or "glm"
+
+	local provider = getProvider(providerCfg)
+	if not provider then
+		return
+	end
+
 	local currentElement = hs.uielement.focusedElement()
 	local selectedText = nil
 
@@ -50,41 +124,58 @@ local function refineText()
 		return
 	end
 
-	hs.alert.show("Refining with GLM-4.7...")
+	if config.refine.show_alerts then
+		hs.alert.show("Refining with " .. provider.name .. "...")
+	end
 
-	-- GLM/OpenAI Compatible JSON Body
-	local body = hs.json.encode({
-		model = "GLM-4.7-Flash",
-		messages = {
-			{ role = "system", content = systemPrompt },
-			{ role = "user", content = selectedText },
-		},
-		temperature = 0.7,
-	})
+	local body = buildRequestBody(
+		providerName,
+		config.providers[providerCfg].model,
+		config.refine.system_prompt,
+		selectedText,
+		config.refine.temperature
+	)
 
 	local headers = {
 		["Content-Type"] = "application/json",
-		["Authorization"] = "Bearer " .. apiKey,
+		["Authorization"] = "Bearer " .. provider.apiKey,
 	}
 
-	hs.http.asyncPost(modelEndpoint, body, headers, function(code, body, headers)
+	-- Add Minimax-specific headers
+	if providerName == "minimax" then
+		headers["Authorization"] = "Bearer " .. provider.apiKey
+	end
+
+	hs.http.asyncPost(provider.endpoint, hs.json.encode(body), headers, function(code, responseBody, _)
 		if code == 200 then
-			local response = hs.json.decode(body)
-			-- GLM returns standard OpenAI format now
-			local refinedText = response.choices[1].message.content
-
-			refinedText = refinedText:gsub("^%s*(.-)%s*$", "%1") -- trim whitespace
-
-			hs.pasteboard.setContents(refinedText)
-			hs.eventtap.keyStroke({ "cmd" }, "v")
+			local ok, refinedText = pcall(extractResponse, providerName, responseBody)
+			if ok and refinedText then
+				refinedText = refinedText:gsub("^%s*(.-)%s*$", "%1")
+				hs.pasteboard.setContents(refinedText)
+				hs.eventtap.keyStroke({ "cmd" }, "v")
+			else
+				hs.alert.show("Failed to parse response")
+			end
 		else
-			-- Error Handling for Zhipu
-			print("Zhipu Error: " .. body)
+			print("API Error (" .. provider.name .. "): " .. responseBody)
 			hs.alert.show("API Error: " .. code)
 		end
 	end)
 end
 
--- Bind to Option + R
-hs.hotkey.bind({ "alt" }, "r", refineText)
+-- Bind hotkey from config
+local hotkeyCfg = config.refine.hotkey or { modifiers = { "alt" }, key = "r" }
+hs.hotkey.bind(hotkeyCfg.modifiers, hotkeyCfg.key, function()
+	refineText(config.refine.default_provider)
+end)
 
+-- Also bind alt+1, alt+2, etc. for switching providers
+local i = 1
+for name, _ in pairs(config.providers) do
+	if config.providers[name].enabled then
+		hs.hotkey.bind({ "alt" }, tostring(i), function()
+			refineText(name)
+		end)
+		i = i + 1
+	end
+end

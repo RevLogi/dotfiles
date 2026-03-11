@@ -75,6 +75,9 @@ temp/
 .env.local
 .env.*.local
 .secrets
+
+# Hammerspoon local config
+hammerspoon/.hammerspoon/config.lua
 *.key
 *.pem
 *.crt

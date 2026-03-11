@@ -120,6 +120,7 @@ git push origin main
 ### Periodic Maintenance
 
 **Weekly:**
+
 ```bash
 brew update && brew upgrade && brew cleanup
 nvim +Lazy sync +qa
@@ -133,13 +134,7 @@ git fetch -p && git branch -vv | grep ': gone]' | awk '{print $1}' | xargs git b
 brew cleanup --prune=30
 ```
 
----
-
-## Hammerspoon Configuration
-
-Hammerspoon is a macOS automation tool that allows you to control your system using Lua scripts.
-
-### Available Features
+### Hammerspoon Features
 
 **Application Launcher** (applauncher.lua)
 - Press `Alt + [key]` to launch/focus applications:
@@ -149,34 +144,22 @@ Hammerspoon is a macOS automation tool that allows you to control your system us
   - `Alt + W`: WeChat
 
 **Text Refinement** (languagetool.lua)
-- Press `Alt + R` to refine selected text using GLM-4.7 API
+
+- Press `Alt + R` to refine selected using configured API
 - Automatically copies selected text (or clipboard contents), refines it via API, and pastes the result
 
-### API Key Configuration
+**Setup Instructions**
 
-To enable text refinement, you need to set your GLM-4.7 API key:
+1. Copy config template to local:
+   ```bash
+   cp ~/dotfiles/hammerspoon/.hammerspoon/config.lua.example \
+   ~/.hammerspoon/config.lua
+   ```
+2. Create ~/.env with your API keys:
 
-```bash
-# Option 1: Add to ~/.zshrc
-echo 'export GLM_API_KEY="your_api_key_here"' >> ~/.zshrc
-source ~/.zshrc
-
-# Option 2: Set temporarily for current session
-export GLM_API_KEY="your_api_key_here"
+```
+GLM_API_KEY=your_glm_key_here
+MINIMAX_API_KEY=your_minimax_key_here
 ```
 
-Get your API key from: https://open.bigmodel.cn/
-
-### Configuration Location
-
-Edit Hammerspoon configs directly in your home directory (symlinked to dotfiles):
-```bash
-vim ~/.hammerspoon/init.lua
-# Changes propagate to ~/dotfiles/hammerspoon/.hammerspoon/init.lua
-```
-
-After editing, reload Hammerspoon config:
-```bash
-hs.reload()
-# Or click the Hammerspoon menu bar icon and select "Reload Config"
-```
+3. Reload Hammerspoon (Cmd+Shift+R)

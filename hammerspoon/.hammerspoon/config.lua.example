@@ -1,0 +1,57 @@
+-- Hammerspoon Local Configuration Template
+-- Copy this file to ~/.hammerspoon/config.lua and customize
+
+local config = {}
+
+-- ============================================================
+-- API Providers Configuration
+-- ============================================================
+-- Each provider needs an API key in your .env file or environment
+
+config.providers = {
+  glm = {
+    enabled = true,
+    name = "Zhipu GLM-4",
+    endpoint = "https://open.bigmodel.cn/api/paas/v4/chat/completions",
+    model = "GLM-4-Flash",
+    env_key = "GLM_API_KEY",  -- reads from this env variable
+  },
+
+  minimax = {
+    enabled = true,
+    name = "MiniMax",
+    endpoint = "https://api.minimax.chat/v1/text/chatcompletion_v2",
+    model = "MiniMax-Text-01",
+    env_key = "MINIMAX_API_KEY",
+  },
+}
+
+-- ============================================================
+-- Refine Settings
+-- ============================================================
+
+config.refine = {
+  -- Default provider to use
+  default_provider = "glm",
+
+  -- Hotkey to trigger refine (modifier + key)
+  hotkey = {
+    modifiers = { "alt" },
+    key = "r",
+  },
+
+  -- System prompt for text refinement
+  system_prompt = "You are a helpful assistant. Rewrite the following text to be concise, natural, and professional English. Do not explain, just output the rewrite.",
+
+  -- Temperature for API calls
+  temperature = 0.7,
+
+  -- Show alerts during processing
+  show_alerts = true,
+}
+
+-- ============================================================
+-- Return config
+-- ============================================================
+
+return config
