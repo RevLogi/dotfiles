@@ -46,8 +46,8 @@ Only deploy the portable packages:
 stow -t ~ zsh nvim tmux
 ```
 
-Do not deploy `kitty`, `hammerspoon`, `orbstack`, `gh`, or the macOS Brewfile on
-the server. Keep the following directories local to each machine:
+Do not deploy `kitty`, `hammerspoon`, `gh`, or the macOS Brewfile on the server.
+Keep the following directories local to each machine:
 
 ```text
 ~/.local/share/nvim

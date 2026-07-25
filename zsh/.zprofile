@@ -6,15 +6,5 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   fi
 fi
 
-typeset -U path PATH
-path=(
-  "$HOME/.local/bin"
-  "$HOME/.local/opt/nvim/bin"
-  "$HOME/.local/opt/dev-tools/bin"
-  "$HOME/.local/share/bob/nvim-bin"
-  "$HOME/.bun/bin"
-  $path
-)
-
 # Added by swiftly on macOS.
 [[ -r "$HOME/.swiftly/env.sh" ]] && source "$HOME/.swiftly/env.sh"

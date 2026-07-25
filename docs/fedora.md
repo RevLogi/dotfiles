@@ -50,7 +50,7 @@ stow -t ~ fedora kde input-remapper zsh nvim tmux vim kitty gh
 ```
 
 Keep an existing `~/.config/opencode` installation local. Do not deploy the
-macOS-only `hammerspoon` or `orbstack` packages.
+macOS-only `hammerspoon` package.
 
 GitHub authentication is also machine-local. Stow manages `config.yml`, while
 `gh auth login` creates the ignored `~/.config/gh/hosts.yml` credential file.
@@ -61,10 +61,10 @@ needed by the Tree-sitter installer. Remove the package with `stow -D fedora`
 when the system curl no longer needs the workaround.
 
 For KWin tiling, workspace, and launch-or-focus shortcuts, see
-[`KDE.md`](KDE.md).
+[`kde.md`](kde.md).
 
 For the Karabiner-equivalent Fedora keyboard mappings, see
-[`KEYBOARD.md`](KEYBOARD.md).
+[`keyboard.md`](keyboard.md).
 
 Initialize the shell, tmux, and Neovim plugins:
 

@@ -130,6 +130,8 @@ source ${ZIM_HOME}/init.zsh
 # }}} End configuration added by Zim Framework install
 
 # Quick Navigation
+alias c='cd ~/Developer/Projects'
+alias d='cd ~/Developer'
 alias dl="cd ~/Downloads"
 alias ll="eza -lah"
 alias lt="eza --tree --level=2"
@@ -151,10 +153,9 @@ fi
 # bun completions
 [[ -s "$BUN_INSTALL/_bun" ]] && source "$BUN_INSTALL/_bun"
 
-case "$(uname -s)" in
-  Darwin) source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/macos.zsh" ;;
-  Linux) source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/linux.zsh" ;;
-esac
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/macos.zsh"
+fi
 
 if [[ -n "$SSH_CONNECTION" ]]; then
   source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/remote.zsh"

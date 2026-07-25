@@ -1,148 +1,63 @@
-# =====================================================================
-# BREWFILE - Homebrew Package Manager Configuration
-# =====================================================================
-#
-# This file manages all Homebrew packages and casks for this dotfiles repo.
-#
-# Usage:
-#   Install all packages:  brew bundle
-#   Check for updates:     brew bundle check
-#   Update packages:       brew bundle install --cleanup
-#
-# =====================================================================
+# Install or reconcile this manifest with `brew bundle`.
 
-# =====================================================================
-# TAPS (Third-party repositories)
-# =====================================================================
-# Additional package repositories for specialized tools
+tap "narugit/tap"   # smctemp
+tap "anomalyco/tap" # OpenCode
 
-tap "narugit/tap"            # smctemp for CPU temperature monitoring
-tap "anomalyco/tap"          # OpenCode AI coding agent
+# Development
+brew "git"
+brew "gcc"
+brew "make"
+brew "cmake"
+brew "node"
+brew "pnpm"
+brew "openjdk"
+brew "zig"
+brew "zls"
 
-# =====================================================================
-# CORE DEVELOPMENT TOOLS
-# =====================================================================
-# Essential build tools and version control for development
+# Terminal
+brew "tmux"
+brew "fzf"
+brew "ripgrep"
+brew "fd"
+brew "tree"
+brew "zoxide"
+brew "yazi"
+brew "fastfetch"
+brew "ncdu"
+brew "stow"
+brew "htop"
+brew "btop"
+brew "narugit/tap/smctemp"
+brew "osx-cpu-temp"
+brew "jq"
+brew "wget"
+brew "mole"
+brew "tldr"
+brew "bat"
+brew "eza"
+brew "gh"
+brew "lazygit"
 
-brew "git"                    # Distributed version control system
-brew "gcc"                    # GNU compiler collection
-brew "make"                   # Build automation tool
-brew "cmake"                  # Cross-platform build system generator
+# Editors and developer tools
+brew "bob"
+brew "neovim"
+brew "stylua"
+brew "swiftformat"
+brew "opencode"
+brew "imagemagick"
+brew "ffmpeg"
+brew "tesseract"
 
-# =====================================================================
-# TERMINAL & SHELL
-# =====================================================================
-# Terminal emulator and shell configuration
+# Applications
+cask "kitty"
+cask "orbstack"
+cask "hammerspoon"
+cask "karabiner-elements"
+cask "emacs-app"
+cask "obsidian"
+cask "typora"
 
-brew "tmux"                   # Terminal multiplexer
-cask "kitty"                  # GPU-accelerated terminal emulator
-cask "orbstack"               # Docker & Linux VM runtime
-
-# =====================================================================
-# TERMINAL UTILITIES & PRODUCTIVITY
-# =====================================================================
-# Navigation, search, and system information tools
-
-# Navigation & search tools
-brew "fzf"                    # Fuzzy finder for command line
-brew "ripgrep"                # Fast text search tool
-brew "fd"                     # Fast file/folder search
-brew "tree"                   # Directory tree viewer
-brew "zoxide"                 # Smart cd replacement
-
-# File managers & system info
-brew "yazi"                   # Terminal file manager (used in zsh function)
-brew "fastfetch"              # System info tool (aliased as 's' in .zshrc)
-brew "ncdu"                   # Interactive disk usage analyzer
-brew "stow"                   # Symbolic link farm manager for dotfiles
-
-# System monitoring
-brew "htop"                   # Interactive process viewer
-brew "btop"                   # Modern process monitor
-brew "narugit/tap/smctemp"   # CPU temperature for tmux status (from narugit tap)
-brew "osx-cpu-temp"           # macOS CPU temperature sensor
-
-# Text processing & utilities
-brew "jq"                     # Lightweight JSON processor
-brew "wget"                   # Network downloader
-brew "mole"                   # SSH connection manager
-brew "tldr"                   # Simplified man pages
-
-# Modern CLI enhancements
-brew "bat"                    # cat clone with syntax highlighting and Git integration
-brew "eza"                    # Modern, maintained replacement for ls
-
-# macOS automation
-cask "hammerspoon"            # macOS automation tool
-cask "karabiner-elements"     # Keyboard customization for macOS
-
-# =====================================================================
-# EDITORS & TOOLS
-# =====================================================================
-# Text editors and version managers
-
-brew "bob"                    # Neovim version manager (PATH in .zshrc)
-brew "neovim"                 # Modern Vim-based text editor
-cask "emacs-app"              # GNU Emacs text editor
-
-# Language formatters & linters
-brew "stylua"                 # Lua code formatter
-brew "swiftformat"            # Swift code formatter
-
-# =====================================================================
-# NOTES & KNOWLEDGE
-# =====================================================================
-# Knowledge base and note-taking applications
-
-cask "obsidian"               # Knowledge base and note-taking app
-cask "typora"                 # Minimal markdown editor
-
-# =====================================================================
-# GITHUB & VERSION CONTROL
-# =====================================================================
-# GitHub CLI for terminal-based GitHub operations
-
-brew "gh"                     # GitHub command-line tool
-brew "lazygit"                # Terminal UI for git operations
-
-# =====================================================================
-# PACKAGE MANAGERS
-# =====================================================================
-# Language package managers
-
-brew "node"                   # JavaScript runtime
-brew "pnpm"                   # Fast, disk space efficient package manager
-
-# =====================================================================
-# AI & DEVELOPMENT ASSISTANTS
-# =====================================================================
-# AI tools and development assistants
-
-brew "opencode"  # OpenCode AI coding agent
-
-# =====================================================================
-# LANGUAGES & RUNTIME
-# =====================================================================
-# Programming language runtimes
-
-brew "openjdk"                # Java development kit
-brew "zig"                    # Zig programming language and toolchain
-brew "zls"                    # Zig language server (kept in sync with Homebrew Zig)
-
-# =====================================================================
-# DEVELOPMENT LIBRARIES
-# =====================================================================
-# Media processing libraries (available for neovim plugins)
-
-brew "imagemagick"            # Image processing
-brew "ffmpeg"                 # Video processing framework
-brew "tesseract"              # OCR engine
-
-# =====================================================================
-# FONTS
-# =====================================================================
-# Nerd fonts for terminal icons and symbols
-
+# Fonts
 cask "font-jetbrains-mono-nerd-font"
 cask "font-fira-code-nerd-font"
 cask "font-symbols-only-nerd-font"
