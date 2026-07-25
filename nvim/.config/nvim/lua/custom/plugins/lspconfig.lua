@@ -23,6 +23,10 @@ return {
     }
 
     local mason_servers = vim.deepcopy(servers)
+    if vim.fn.executable 'zls' == 1 then
+      servers[#servers + 1] = 'zls'
+    end
+
     local tools = {
       'stylua',
       'clang-format',
@@ -48,7 +52,7 @@ return {
     end
 
     require('mason').setup {
-      PATH = platform.is_remote and 'append' or 'prepend',
+      PATH = 'append',
       max_concurrent_installers = platform.is_remote and 2 or 4,
     }
 

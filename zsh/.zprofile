@@ -15,3 +15,6 @@ path=(
   "$HOME/.bun/bin"
   $path
 )
+
+# Added by swiftly
+. "/Users/liuguangxi/.swiftly/env.sh"

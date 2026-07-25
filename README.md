@@ -27,10 +27,11 @@ A terminal-first, keyboard-driven macOS development environment — **Catppuccin
 | Component | Role | Highlights |
 |-----------|------|------------|
 | **Zsh** | Shell | Zim framework with asciiship prompt, autosuggestions, syntax highlighting, fzf-tab completion; vi-mode with cursor shape change; aliases for quick navigation (`c`→Projects, `d`→Developer) |
-| **Neovim** | Primary editor | kickstart.nvim foundation; blink.cmp for Tab-based completion; LSP for C/C++/Lua/Swift/Python/TypeScript/JSON/Vim; DAP debugging; treesitter; gitsigns; Oil.nvim; LeetCode integration; Conform formatting (stylua/clang-format/swiftformat) |
+| **Neovim** | Primary editor | kickstart.nvim foundation; blink.cmp for Tab-based completion; LSP for C/C++/Lua/Swift/Python/TypeScript/JSON/Vim/Zig; DAP debugging; treesitter; gitsigns; Oil.nvim; LeetCode integration; Conform formatting (stylua/clang-format/swiftformat/zigfmt) |
 | **Tmux** | Terminal multiplexer | Catppuccin status bar with CPU/RAM/temperature monitoring via `smctemp`; smart-split (`C-f i` splits vertical/horizontal based on pane ratio); vi-mode copy; seamless Neovim navigation |
 | **Kitty** | Terminal emulator | Auto theme switching (dark/light Catppuccin); remote control for image.nvim; powerline tab bar |
 | **Hammerspoon** | macOS automation | Application launcher (Alt+key to focus apps); LLM-powered text refinement (GLM-4 / MiniMax) via Alt+R |
+| **Karabiner-Elements** | Keyboard customization | Caps Lock as Escape/Control; Control+HJKL navigation; modifier and function-key remaps |
 | **Vim** | Fallback editor | Minimal vim-plug setup with slime, surround, trailing-whitespace; hard mode (no arrow keys) |
 | **OpenCode** | AI coding agent | Terminal-native AI pair programming |
 | **OrbStack** | Docker / Linux VM | Lightweight container runtime for macOS |
@@ -105,6 +106,15 @@ A terminal-first, keyboard-driven macOS development environment — **Catppuccin
 | `Alt+R` | Refine selected text via LLM |
 | `Alt+1` / `Alt+2` | Refine with alternative LLM providers |
 
+### Karabiner-Elements
+
+| Binding | Action |
+|---------|--------|
+| `Caps Lock` | Escape when tapped, Left Control when held |
+| `Left Control+H/J/K/L` | Left/Down/Up/Right arrow |
+| `Right Command` | Left Option |
+| `Right Option` | Fn |
+
 ## Installation
 
 For the shared Ubuntu server workflow, see [`SERVER.md`](SERVER.md). The server
@@ -132,7 +142,7 @@ git clone https://github.com/RevLogi/dotfiles.git ~/dotfiles && cd ~/dotfiles
 brew bundle
 
 # 3. Create symlinks with Stow
-stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh hammerspoon
+stow -t ~ zsh nvim opencode orbstack tmux vim kitty gh hammerspoon karabiner
 
 # 4. Initialize plugins
 source ~/.zshrc                                                   # Zim auto-installs
@@ -171,6 +181,7 @@ dotfiles/
  ├── opencode/         → ~/.config/opencode (AI coding)
  ├── orbstack/         → ~/.orbstack/ (Docker/Linux VM)
  ├── hammerspoon/      → ~/.hammerspoon/ (macOS automation)
+ ├── karabiner/        → ~/.config/karabiner (Keyboard customization)
  ├── .vim/             → ~/.vim/ (Vim ftplugin + plugins)
  ├── Brewfile          (Homebrew packages)
  ├── .gitignore        (Excluded files)
@@ -192,7 +203,7 @@ vim ~/dotfiles/zsh/.zshrc && source ~/.zshrc
 ```bash
 cd ~/dotfiles
 git pull origin main
-stow -R -t ~ zsh nvim opencode orbstack tmux vim kitty gh hammerspoon
+stow -R -t ~ zsh nvim opencode orbstack tmux vim kitty gh hammerspoon karabiner
 source ~/.zshrc && tmux source-file ~/.tmux.conf
 ```
 

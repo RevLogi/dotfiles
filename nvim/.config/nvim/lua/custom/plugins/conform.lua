@@ -39,6 +39,7 @@ return {
       c = { 'clang-format' },
       cpp = { 'clang-format' },
       cuda = { 'clang-format' },
+      zig = { 'zigfmt' },
       swift = { 'swiftformat' },
       javascript = { 'prettierd' },
       javascriptreact = { 'prettierd' },
