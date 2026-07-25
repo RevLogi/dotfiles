@@ -126,6 +126,8 @@ brew "opencode"  # OpenCode AI coding agent
 # Programming language runtimes
 
 brew "openjdk"                # Java development kit
+brew "zig"                    # Zig programming language and toolchain
+brew "zls"                    # Zig language server (kept in sync with Homebrew Zig)
 
 # =====================================================================
 # DEVELOPMENT LIBRARIES
@@ -144,4 +146,3 @@ brew "tesseract"              # OCR engine
 cask "font-jetbrains-mono-nerd-font"
 cask "font-fira-code-nerd-font"
 cask "font-symbols-only-nerd-font"
-

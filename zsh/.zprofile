@@ -15,3 +15,6 @@ path=(
   "$HOME/.bun/bin"
   $path
 )
+
+# Added by swiftly on macOS.
+[[ -r "$HOME/.swiftly/env.sh" ]] && source "$HOME/.swiftly/env.sh"

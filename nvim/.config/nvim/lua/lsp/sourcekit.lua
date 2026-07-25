@@ -8,7 +8,7 @@ local function setup()
   local function start_lsp()
     local buf = vim.api.nvim_get_current_buf()
     local fname = vim.api.nvim_buf_get_name(buf)
-    local root = vim.fs.root(buf, { 'Package.swift', '.git' })
+    local root = vim.fs.root(buf, { 'Package.swift' })
     local fallback = vim.fn.fnamemodify(fname, ':p:h')
 
     vim.lsp.start({

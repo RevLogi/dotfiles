@@ -22,7 +22,7 @@ return {
     },
     keymaps = {
       ['-'] = 'actions.parent',
-      ['q'] = 'actions.close',
+      ['<Esc>'] = 'actions.close',
     },
     columns = {
       'icon',
