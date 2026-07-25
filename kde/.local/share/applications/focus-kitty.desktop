@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Focus or Launch Kitty
+Exec=focus-or-launch kitty kitty
+Icon=kitty
+NoDisplay=true
+StartupNotify=false
+X-KDE-GlobalAccel-CommandShortcut=true
+X-KDE-Shortcuts=Meta+K

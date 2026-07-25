@@ -1,1 +1,3 @@
-# Keep Linux-specific interactive settings in this file.
+# Linux navigation shortcuts.
+alias d='cd ~/Developer'
+alias c='cd ~/Developer/Projects'

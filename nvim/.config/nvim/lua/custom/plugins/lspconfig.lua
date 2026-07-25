@@ -19,8 +19,11 @@ return {
       'ruff',
       'vimls',
       'clangd',
-      'openscad_lsp',
     }
+
+    if vim.fn.executable 'openscad-lsp' == 1 or vim.fn.executable 'cargo' == 1 then
+      servers[#servers + 1] = 'openscad_lsp'
+    end
 
     local mason_servers = vim.deepcopy(servers)
     local tools = {
@@ -28,6 +31,15 @@ return {
       'clang-format',
       'prettierd',
     }
+
+    if vim.fn.executable 'clangd' == 1 then
+      for index, server_name in ipairs(mason_servers) do
+        if server_name == 'clangd' then
+          table.remove(mason_servers, index)
+          break
+        end
+      end
+    end
 
     if platform.is_remote then
       mason_servers = {}

@@ -75,6 +75,7 @@ temp/
 .env.local
 .env.*.local
 .secrets
+gh/.config/gh/hosts.yml
 
 # Hammerspoon local config
 hammerspoon/.hammerspoon/config.lua

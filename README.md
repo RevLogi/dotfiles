@@ -107,6 +107,13 @@ A terminal-first, keyboard-driven macOS development environment — **Catppuccin
 
 ## Installation
 
+For Fedora Asahi Remix and other Fedora workstations, see
+[`FEDORA.md`](FEDORA.md). It uses native Fedora packages and excludes the
+macOS-only Hammerspoon and OrbStack packages.
+
+For the KDE Plasma tiling and application-switching workflow, see
+[`KDE.md`](KDE.md).
+
 For the shared Ubuntu server workflow, see [`SERVER.md`](SERVER.md). The server
 uses only the portable `zsh`, `nvim`, and `tmux` packages and installs all
 machine-specific binaries and caches independently.

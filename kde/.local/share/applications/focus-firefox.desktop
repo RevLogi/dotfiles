@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Focus or Launch Firefox
+Exec=focus-or-launch org.mozilla.firefox org.mozilla.firefox
+Icon=firefox
+NoDisplay=true
+StartupNotify=false
+X-KDE-GlobalAccel-CommandShortcut=true
+X-KDE-Shortcuts=Meta+S

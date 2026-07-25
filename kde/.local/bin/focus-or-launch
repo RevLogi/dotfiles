@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -eu
+
+if [ "$#" -ne 2 ]; then
+  printf 'usage: focus-or-launch WINDOW_CLASS DESKTOP_ID\n' >&2
+  exit 2
+fi
+
+window_id=$(kdotool search --class --limit 1 "$1" getwindowid 2>/dev/null || true)
+
+if [ -n "$window_id" ]; then
+  exec kdotool windowactivate "$window_id"
+fi
+
+exec gtk-launch "$2"
