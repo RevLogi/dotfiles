@@ -6,4 +6,4 @@ Icon=kitty
 NoDisplay=true
 StartupNotify=false
 X-KDE-GlobalAccel-CommandShortcut=true
-X-KDE-Shortcuts=Meta+K
+X-KDE-Shortcuts=Alt+K

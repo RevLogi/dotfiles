@@ -24,8 +24,8 @@ kbuildsycoca6
 
 | Shortcut | Action |
 |----------|--------|
-| `Meta+S` | Focus Firefox, or launch it when absent |
-| `Meta+K` | Focus Kitty, or launch it when absent |
+| `Alt+S` | Focus Firefox, or launch it when absent |
+| `Alt+K` | Focus Kitty, or launch it when absent |
 
 The hidden desktop entries register the shortcuts with KGlobalAccel. The
 `focus-or-launch` helper uses `kdotool`, so focusing works natively under KWin

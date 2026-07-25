@@ -6,4 +6,4 @@ Icon=firefox
 NoDisplay=true
 StartupNotify=false
 X-KDE-GlobalAccel-CommandShortcut=true
-X-KDE-Shortcuts=Meta+S
+X-KDE-Shortcuts=Alt+S
