@@ -1,0 +1,62 @@
+[
+    {
+        "input_combination": [{ "type": 1, "code": 58 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "if_single(key(Escape), hold_keys(Control_L))"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 29 }, { "type": 1, "code": 35 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "Left"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 29 }, { "type": 1, "code": 36 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "Down"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 29 }, { "type": 1, "code": 37 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "Up"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 29 }, { "type": 1, "code": 38 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "Right"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 126 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "Alt_L"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 100 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "disable"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 100 }, { "type": 1, "code": 64 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "Super_L + g"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 100 }, { "type": 1, "code": 67 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "XF86MonBrightnessDown"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 100 }, { "type": 1, "code": 68 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "XF86MonBrightnessUp"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 100 }, { "type": 1, "code": 87 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "XF86AudioLowerVolume"
+    },
+    {
+        "input_combination": [{ "type": 1, "code": 100 }, { "type": 1, "code": 88 }],
+        "target_uinput": "keyboard",
+        "output_symbol": "XF86AudioRaiseVolume"
+    }
+]

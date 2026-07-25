@@ -11,7 +11,7 @@ Install the terminal stack from Fedora's repositories:
 ```bash
 sudo dnf install \
   zsh stow kitty tmux neovim gh fzf ripgrep fd-find eza zoxide fastfetch \
-  bat btop htop ncdu
+  bat btop htop ncdu input-remapper
 ```
 
 The Neovim configuration installs its remaining language tools through Mason.
@@ -46,7 +46,7 @@ packages:
 ```bash
 mkdir -p ~/Developer/Projects
 cd ~/Developer/dotfiles
-stow -t ~ fedora kde zsh nvim tmux vim kitty gh
+stow -t ~ fedora kde input-remapper zsh nvim tmux vim kitty gh
 ```
 
 Keep an existing `~/.config/opencode` installation local. Do not deploy the
@@ -62,6 +62,9 @@ when the system curl no longer needs the workaround.
 
 For KWin tiling, workspace, and launch-or-focus shortcuts, see
 [`KDE.md`](KDE.md).
+
+For the Karabiner-equivalent Fedora keyboard mappings, see
+[`KEYBOARD.md`](KEYBOARD.md).
 
 Initialize the shell, tmux, and Neovim plugins:
 

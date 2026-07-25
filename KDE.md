@@ -2,6 +2,7 @@
 
 This workstation uses Plasma 6 on Wayland with KWin's native custom tiling.
 The current layout has three columns at 25%, 50%, and 25% with 4 px gaps.
+System-wide keyboard remaps are documented in [`KEYBOARD.md`](KEYBOARD.md).
 
 ## Packages
 

@@ -32,6 +32,7 @@ A terminal-first, keyboard-driven macOS development environment — **Catppuccin
 | **Kitty** | Terminal emulator | Auto theme switching (dark/light Catppuccin); remote control for image.nvim; powerline tab bar |
 | **Hammerspoon** | macOS automation | Application launcher (Alt+key to focus apps); LLM-powered text refinement (GLM-4 / MiniMax) via Alt+R |
 | **Karabiner-Elements** | Keyboard customization | Caps Lock as Escape/Control; Control+HJKL navigation; modifier and function-key remaps |
+| **Input Remapper** | Fedora keyboard customization | Karabiner-equivalent mappings for KDE Wayland |
 | **Vim** | Fallback editor | Minimal vim-plug setup with slime, surround, trailing-whitespace; hard mode (no arrow keys) |
 | **OpenCode** | AI coding agent | Terminal-native AI pair programming |
 | **OrbStack** | Docker / Linux VM | Lightweight container runtime for macOS |
@@ -123,6 +124,8 @@ macOS-only Hammerspoon and OrbStack packages.
 
 For the KDE Plasma tiling and application-switching workflow, see
 [`KDE.md`](KDE.md).
+
+For cross-platform keyboard remapping, see [`KEYBOARD.md`](KEYBOARD.md).
 
 For the shared Ubuntu server workflow, see [`SERVER.md`](SERVER.md). The server
 uses only the portable `zsh`, `nvim`, and `tmux` packages and installs all
