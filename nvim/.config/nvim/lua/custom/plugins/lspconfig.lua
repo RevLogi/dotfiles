@@ -36,11 +36,19 @@ return {
       'prettierd',
     }
 
-    if vim.fn.executable 'clangd' == 1 then
-      for index, server_name in ipairs(mason_servers) do
-        if server_name == 'clangd' then
-          table.remove(mason_servers, index)
-          break
+    -- Prefer Homebrew-managed binaries when available; Mason only installs the rest.
+    local brew_servers = {
+      clangd = 'clangd',
+      basedpyright = 'basedpyright-langserver',
+      ruff = 'ruff',
+    }
+    for server_name, executable in pairs(brew_servers) do
+      if vim.fn.executable(executable) == 1 then
+        for index, name in ipairs(mason_servers) do
+          if name == server_name then
+            table.remove(mason_servers, index)
+            break
+          end
         end
       end
     end
