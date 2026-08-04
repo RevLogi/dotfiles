@@ -11,6 +11,26 @@ return {
     local lsp_utils = require 'lsp.init'
     local platform = require 'custom.platform'
 
+    local package_executables = {
+      lua_ls = 'lua-language-server',
+      ts_ls = 'typescript-language-server',
+      jsonls = 'vscode-json-language-server',
+      basedpyright = 'basedpyright-langserver',
+      vimls = 'vim-language-server',
+      openscad_lsp = 'openscad-lsp',
+    }
+
+    local function missing_packages(packages)
+      local missing = {}
+      for _, package in ipairs(packages) do
+        local executable = package_executables[package] or package
+        if vim.fn.executable(executable) == 0 then
+          missing[#missing + 1] = package
+        end
+      end
+      return missing
+    end
+
     local servers = {
       'lua_ls',
       'ts_ls',
@@ -25,7 +45,6 @@ return {
       servers[#servers + 1] = 'openscad_lsp'
     end
 
-    local mason_servers = vim.deepcopy(servers)
     if vim.fn.executable 'zls' == 1 then
       servers[#servers + 1] = 'zls'
     end
@@ -36,39 +55,12 @@ return {
       'prettierd',
     }
 
-    -- Prefer Homebrew-managed binaries when available; Mason only installs the rest.
-    local brew_servers = {
-      clangd = 'clangd',
-      basedpyright = 'basedpyright-langserver',
-      ruff = 'ruff',
-    }
-    for server_name, executable in pairs(brew_servers) do
-      if vim.fn.executable(executable) == 1 then
-        for index, name in ipairs(mason_servers) do
-          if name == server_name then
-            table.remove(mason_servers, index)
-            break
-          end
-        end
-      end
-    end
+    local mason_servers = missing_packages(servers)
+    tools = missing_packages(tools)
 
     if platform.is_remote then
-      mason_servers = {}
-      tools = {}
-
-      if vim.fn.executable 'lua-language-server' == 0 then
-        mason_servers[#mason_servers + 1] = 'lua_ls'
-      end
-      if vim.fn.executable 'clangd' == 0 then
-        mason_servers[#mason_servers + 1] = 'clangd'
-      end
-      if vim.fn.executable 'stylua' == 0 then
-        tools[#tools + 1] = 'stylua'
-      end
-      if vim.fn.executable 'clang-format' == 0 then
-        tools[#tools + 1] = 'clang-format'
-      end
+      mason_servers = missing_packages { 'lua_ls', 'clangd' }
+      tools = missing_packages { 'stylua', 'clang-format' }
     end
 
     require('mason').setup {
