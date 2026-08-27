@@ -1,7 +1,6 @@
 # Install or reconcile this manifest with `brew bundle`.
 
 tap "narugit/tap"   # smctemp
-tap "anomalyco/tap" # OpenCode
 
 # Development
 brew "git"
@@ -46,10 +45,12 @@ brew "stylua"
 brew "swiftformat"
 brew "ruff"
 brew "basedpyright"
-brew "opencode"
 brew "imagemagick"
 brew "ffmpeg"
 brew "tesseract"
+
+# AI coding agent
+npm "@earendil-works/pi-coding-agent"
 
 # Applications
 cask "kitty"

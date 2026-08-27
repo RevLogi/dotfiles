@@ -49,8 +49,8 @@ cd ~/Developer/dotfiles
 stow -t ~ fedora kde input-remapper zsh nvim tmux vim kitty gh
 ```
 
-Keep an existing `~/.config/opencode` installation local. Do not deploy the
-macOS-only `hammerspoon` package.
+Keep an existing `~/.pi/agent` installation local. Do not deploy the macOS-only
+`hammerspoon` package.
 
 GitHub authentication is also machine-local. Stow manages `config.yml`, while
 `gh auth login` creates the ignored `~/.config/gh/hosts.yml` credential file.

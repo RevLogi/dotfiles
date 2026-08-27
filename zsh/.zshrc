@@ -138,7 +138,7 @@ alias lt="eza --tree --level=2"
 alias lg="eza -lah --git"
 
 # Core Aliases
-alias o="opencode"
+alias o='pi'
 alias ff='fastfetch'
 alias v='vim'
 alias sz='exec zsh'

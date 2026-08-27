@@ -7,6 +7,8 @@ local key2app = {
 	t = "Typora",
 	p = "Preview",
 	v = "Visual Studio Code",
+	m = "MiaoYan",
+	c = "ChatGPT",
 }
 
 for key, app in pairs(key2app) do

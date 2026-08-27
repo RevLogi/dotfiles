@@ -24,12 +24,15 @@ return {
     formatters = {
       ['clang-format'] = {
         command = 'clang-format',
-        args = {
-          '--style=file',
-          '--fallback-style=Google',
-          '--assume-filename',
-          '$FILENAME',
-        },
+        args = function(_, ctx)
+          local project_config = vim.fs.find({ '.clang-format', '_clang-format' }, {
+            path = vim.fs.dirname(ctx.filename),
+            upward = true,
+          })[1]
+          local style = project_config and 'file' or 'file:' .. vim.fs.joinpath(vim.fn.stdpath 'config', '.clang-format')
+
+          return { '--style=' .. style, '--assume-filename', '$FILENAME' }
+        end,
         stdin = true,
       },
     },
