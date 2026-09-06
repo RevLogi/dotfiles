@@ -7,13 +7,6 @@ description: Fetch timestamped YouTube transcripts for source-grounded analysis 
 
 Fetch transcripts from YouTube videos.
 
-## Setup
-
-```bash
-cd {baseDir}
-npm install
-```
-
 ## Usage
 
 ```bash
@@ -40,6 +33,7 @@ Timestamped transcript entries:
 ## Notes
 
 - Requires the video to have captions/transcripts available
+- Its Node dependency is installed with the enclosing `pi-material-mentor` package
 - Works with auto-generated and manual transcripts
 - Treat the transcript as a source extraction, not as a complete account of visual content
 - When saving it as course material, preserve the video URL and timestamps and keep any AI summary separate

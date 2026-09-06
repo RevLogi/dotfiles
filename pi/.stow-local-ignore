@@ -3,5 +3,5 @@ node_modules
 __pycache__
 \.venv
 \.pyc$
-^\.pi/agent/(?:auth\.json|oauth\.json|models\.json|models-store\.json|trust\.json)$
-^\.pi/agent/(?:sessions|npm|git|bin|tools|\.pi)(?:/|$)
+\.pi/agent/(?:auth\.json|oauth\.json|models\.json|models-store\.json|trust\.json)$
+\.pi/agent/(?:sessions|npm|git|bin|tools|\.pi)(?:/|$)

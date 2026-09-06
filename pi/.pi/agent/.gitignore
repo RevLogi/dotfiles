@@ -6,8 +6,8 @@ models.json
 # Runtime state and downloaded packages
 trust.json
 models-store.json
-sessions/
-npm/
-git/
-bin/
-tools/
+/sessions/
+/npm/
+/git/
+/bin/
+/tools/

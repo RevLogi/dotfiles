@@ -140,24 +140,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Set auto-save
-local autosave_group = vim.api.nvim_create_augroup('AutoSaveGroup', { clear = true })
-
-vim.api.nvim_create_autocmd('InsertLeave', {
-  group = autosave_group,
-  pattern = '*',
-  callback = function()
-    local buf = vim.api.nvim_get_current_buf()
-    local buftype = vim.bo[buf].buftype
-    local modifiable = vim.bo[buf].modifiable
-    local modified = vim.bo[buf].modified
-    local file_path = vim.fn.expand '%'
-
-    if modified and modifiable and buftype == '' and file_path ~= '' then
-      vim.cmd 'silent! write'
-    end
-  end,
-})
+-- Save ordinary files after leaving insert mode. Automatic saves deliberately
+-- skip BufWritePre/BufWritePost; an explicit :write remains the format-on-save
+-- path. Use :AutoSaveToggle or :AutoSaveStatus to control and inspect it.
+require('custom.autosave').setup()
 
 vim.filetype.add {
   extension = {

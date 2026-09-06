@@ -13,6 +13,8 @@
     "local-mlx//Users/liuguangxi/.local/share/qwen35-4b-uncensored-4bit"
   ],
   "packages": [
+    "./packages-local/pi-material-mentor",
+    "./packages-local/pi-anki-english",
     "npm:@sherif-fanous/pi-catppuccin@0.2.0",
     {
       "source": "git:github.com/mitsuhiko/agent-stuff@13bc8f87970bec8830aab0f1c0487d35aa7c0917",

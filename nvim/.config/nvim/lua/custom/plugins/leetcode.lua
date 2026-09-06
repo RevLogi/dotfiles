@@ -1,6 +1,7 @@
 return {
   'kawre/leetcode.nvim',
   enabled = not require('custom.platform').is_remote,
+  cmd = 'Leet',
   build = ':TSUpdate html',
   dependencies = {
     'nvim-telescope/telescope.nvim',
@@ -9,6 +10,5 @@ return {
   },
   opts = {
     lang = 'python3',
-    image_support = false,
   },
 }

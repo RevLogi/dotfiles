@@ -27,7 +27,7 @@ cd ~/dotfiles
 stow -t ~ pi
 ```
 
-本仓库的 `~/.pi` 已经链接到 dotfiles 时不需要重复执行。你可以用下面的命令检查资源是否加载：
+本仓库的 `~/.pi` 已经链接到 dotfiles 时不需要重复执行。`pi-material-mentor` 作为独立的本地 Pi package 由 `settings.json` 加载。你可以用下面的命令检查资源是否加载：
 
 ```bash
 pi --offline --no-session --verbose
@@ -38,8 +38,9 @@ pi --offline --no-session --verbose
 - skill：`material-mentor`
 - prompts：`/learn`、`/learn-modern`、`/check`、`/review`、`/explore`、`/checkpoint`
 - extension：`ask-user.ts`
-- extension：`learning-workspace.ts`、`bash-guard.ts`、`change-log.ts`
-- extension：`btw.ts`
+- extension：`learning-workspace.ts`
+
+`bash-guard.ts`、`change-log.ts` 和第三方 `/btw` 属于基础 Pi 配置，不是本 package 的依赖。
 
 看到以后按 `Ctrl-D` 退出即可。
 
@@ -48,7 +49,7 @@ pi --offline --no-session --verbose
 课程最好直接放在 Obsidian Vault 里面。以 CII 为例：
 
 ```bash
-~/.pi/agent/skills/material-mentor/scripts/init-course.sh \
+~/.pi/agent/packages-local/pi-material-mentor/skills/material-mentor/scripts/init-course.sh \
   ~/Documents/Obsidian/MyVault/Learning/CII \
   "C Interfaces and Implementations"
 ```

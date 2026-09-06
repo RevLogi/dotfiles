@@ -33,7 +33,7 @@ export MAMBA_ROOT_PREFIX="$HOME/.local/share/micromamba"
   -f "$HOME/dotfiles/server/dev-tools.yml"
 ```
 
-Install Neovim 0.11 or newer from its official Linux x86_64 release archive in
+Install Neovim 0.12 or newer from its official Linux x86_64 release archive in
 `~/.local/opt/nvim`. This is kept separate because conda-forge does not provide
 the required Neovim executable version.
 

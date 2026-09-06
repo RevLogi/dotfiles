@@ -34,8 +34,8 @@ Do not create multiple near-identical notes from an expression and each of its c
 
 1. Call `anki_add_english` with `write` omitted or `false`.
 2. Present a compact preview and explicitly point out corrections, uncertain meanings, and duplicate or invalid entries.
-3. Ask one blocking confirmation with `ask_user`. Offer clear choices such as `Add eligible notes`, `Revise`, and `Cancel`; do not permit an open-ended alternative when those three choices cover the decision.
-4. Only after `Add eligible notes`, call `anki_add_english` again with the same entries and `write: true`. The extension performs a final native confirmation and duplicate check.
+3. Ask in chat whether to add the eligible notes, revise them, or cancel, then stop and wait for the learner's answer.
+4. Only after the learner explicitly chooses to add them, call `anki_add_english` again with the same entries and `write: true`. The extension performs a final native confirmation and duplicate check.
 5. Report note IDs returned by the tool and distinguish added, skipped, failed, and cancelled items. Never claim success from a preview.
 
 If the learner explicitly asks only for a preview, stop after step 2. If the learner asks to add immediately, still preview once; keep the explanation brief because the extension will require final confirmation.

@@ -9,7 +9,7 @@ packages are deployed selectively.
 | Component | Configuration |
 |-----------|---------------|
 | Shell | Zsh, Zim, vi mode, zoxide, and fzf |
-| Editor | Neovim 0.11+, LSP, Tree-sitter, DAP, and Vim fallback |
+| Editor | Neovim 0.12+, LSP, Tree-sitter, and Vim fallback |
 | Terminal | Kitty with Catppuccin themes |
 | Multiplexer | tmux with `C-f` prefix and Neovim navigation |
 | Automation | Hammerspoon and Karabiner-Elements on macOS |
@@ -80,15 +80,16 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ~/.tmux/plugins/tpm/bin/install_plugins
 nvim --headless "+Lazy! sync" +qa
 npm --prefix ~/.pi/agent ci
-npm --prefix ~/.pi/agent/skills/youtube-transcript ci
+npm --prefix ~/.pi/agent/packages-local/pi-material-mentor ci
+npm --prefix ~/.pi/agent/packages-local/pi-anki-english ci
 ```
 
 The optional PDF material converter uses an isolated Python environment:
 
 ```bash
-/usr/bin/python3 -m venv ~/.pi/agent/skills/material-mentor/.venv
-~/.pi/agent/skills/material-mentor/.venv/bin/pip install \
-  -r ~/.pi/agent/skills/material-mentor/requirements.txt
+/usr/bin/python3 -m venv ~/.pi/agent/packages-local/pi-material-mentor/tools/cii-import/.venv
+~/.pi/agent/packages-local/pi-material-mentor/tools/cii-import/.venv/bin/pip install \
+  -r ~/.pi/agent/packages-local/pi-material-mentor/tools/cii-import/requirements.txt
 ```
 
 Run machine-local authentication separately with `gh auth login` and Pi's
@@ -98,20 +99,20 @@ and runtime state are ignored.
 CodeCompanion chat authenticates through ChatGPT when first opened. Its ACP
 chat is the single Neovim AI entry point, so no OpenAI API key is required.
 
-## Material-first learning with Pi
+## Pi learning tools
 
-The Pi package includes a `material-mentor` skill, `/learn`, `/learn-modern`,
-`/check`, `/review`, `/explore`, and `/checkpoint` prompts, an interactive
-`ask_user` tool, course-aware state injection, material write protection,
-dangerous-shell confirmation, a lightweight file-change list, and the `/btw`
-side channel. The course itself stays in an Obsidian-readable folder of
-ordinary Markdown files.
+Two independent local Pi packages keep course-based learning and English Anki
+capture separate. `pi-material-mentor` provides the course workflow, prompts,
+interactive questions, transcript extraction, and material protection.
+`pi-anki-english` owns the English note model, preview, duplicate checks, and
+confirmed Anki writes. The base Pi configuration retains general shell safety,
+change tracking, and third-party packages.
 
 Initialize a course, add human-written source material, and start Pi from that
 course directory:
 
 ```bash
-~/.pi/agent/skills/material-mentor/scripts/init-course.sh \
+~/.pi/agent/packages-local/pi-material-mentor/skills/material-mentor/scripts/init-course.sh \
   ~/Documents/Obsidian/MyVault/Learning/CII \
   "C Interfaces and Implementations"
 cd ~/Documents/Obsidian/MyVault/Learning/CII
@@ -124,7 +125,7 @@ reading, `/review` for retrieval practice, `/explore` for a controlled detour,
 Pi may update `COURSE.md`, `PROGRESS.md`, `QUESTIONS.md`, and compact notes under
 `sessions/`; material and learner-authored concept notes remain human-owned.
 
-See the [Chinese usage guide](docs/material-mentor.md) for the complete daily
+See the [Chinese usage guide](pi/.pi/agent/packages-local/pi-material-mentor/docs/usage.md) for the complete daily
 workflow, file ownership rules, Obsidian integration, and troubleshooting.
 
 ## Common Bindings

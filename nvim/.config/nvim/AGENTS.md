@@ -6,14 +6,14 @@
 - `lua/custom/plugins/`: plugin specifications
 - `lua/custom/platform.lua`: platform and remote-session detection
 - `lua/lsp/`: shared LSP utilities and non-default server overrides
-- `lua/kickstart/health.lua`: custom health checks
+- `lua/dotfiles/health.lua`: custom health checks
 
 ## Validation
 
 ```bash
 stylua --check .
 nvim --headless +qa
-nvim --headless "+checkhealth kickstart" +qa
+nvim --headless "+checkhealth dotfiles" +qa
 ```
 
 ## Style

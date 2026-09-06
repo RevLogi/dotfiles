@@ -9,7 +9,7 @@ import {
   resolveAnkiEndpoint,
   sanitizeTag,
   textToHtml,
-} from "../anki/core.ts";
+} from "../extensions/anki/core.ts";
 
 describe("Anki connection safety", () => {
   test.each([

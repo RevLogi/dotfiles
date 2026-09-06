@@ -11,7 +11,7 @@ Install the terminal stack from Fedora's repositories:
 ```bash
 sudo dnf install \
   zsh stow kitty tmux neovim gh fzf ripgrep fd-find eza zoxide fastfetch \
-  bat btop htop ncdu input-remapper
+  bat btop ncdu input-remapper
 ```
 
 The Neovim configuration installs its remaining language tools through Mason.
